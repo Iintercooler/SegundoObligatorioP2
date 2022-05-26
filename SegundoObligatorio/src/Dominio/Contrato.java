@@ -5,7 +5,7 @@ public class Contrato {
     Empleado empleado;
     Cliente cliente;
     Deposito Deposito ;
-    int numeroDeContrato;
+    int numeroDeContrato=0;
 
     public void setEmpleado(Empleado empleado) {
         this.empleado = empleado;
