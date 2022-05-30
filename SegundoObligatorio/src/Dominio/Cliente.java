@@ -1,6 +1,8 @@
 package Dominio;
 
-public class Cliente extends Persona {
+import java.io.Serializable;
+
+public class Cliente extends Persona implements Serializable{
     String mail;
 
     public void setMail(String mail) {
@@ -11,9 +13,20 @@ public class Cliente extends Persona {
         return mail;
     }
 
-    public Cliente(String mail, String nombre, String cedula, int telefono) {
+    public Cliente(String mail, String nombre, String cedula, String telefono) {
         super(nombre, cedula, telefono);
         setMail(mail);
     }
 
+    @Override
+    public String toString() {
+        return "Cliente{" + "mail=" + mail + '}';
+    }
+
+  
+
+    
+    
+    
+    
 }

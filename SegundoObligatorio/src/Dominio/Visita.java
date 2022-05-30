@@ -1,10 +1,11 @@
 
 package Dominio;
 
+import java.io.Serializable;
 import java.util.Date;
 
 
-public class Visita {
+public class Visita implements Serializable{
     Deposito deposito;
     Cliente cliente;
     Empleado empleado;
@@ -47,6 +48,11 @@ public class Visita {
         this.cliente = cliente;
         this.empleado = empleado;
         this.fecha = fecha;
+    }
+
+    @Override
+    public String toString() {
+        return "Visita{" + "deposito=" + deposito + ", cliente=" + cliente + ", empleado=" + empleado + ", fecha=" + fecha + '}';
     }
     
     

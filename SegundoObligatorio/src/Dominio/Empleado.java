@@ -1,7 +1,9 @@
 package Dominio;
 
+import java.io.Serializable;
 
-public class Empleado extends Persona {
+
+public class Empleado extends Persona implements Serializable{
     String direccion;
     int añoDeIngreso;
 
@@ -24,11 +26,19 @@ public class Empleado extends Persona {
 
 
 
-    public Empleado(String direccion, int añoDeIngreso, String nombre, String cedula, int telefono) {
+    public Empleado(String direccion, int añoDeIngreso, String nombre, String cedula, String telefono) {
         super(nombre, cedula, telefono);
         this.direccion = direccion;
         this.añoDeIngreso = añoDeIngreso;
     }
+
+    @Override
+    public String toString() {
+        return "Empleado{" + "direccion=" + direccion + ", a\u00f1oDeIngreso=" + añoDeIngreso + '}';
+    }
+    
+    
+    
     
     
     

@@ -1,6 +1,8 @@
 package Dominio;
 
-public class Deposito {
+import java.io.Serializable;
+
+public class Deposito implements Serializable{
     int numero;
     int tamaño;
     boolean estantes;
@@ -53,6 +55,11 @@ public class Deposito {
         this.estantes = estantes;
         this.refrigerado = refrigerado;
         this.ocupado = false;
+    }
+
+    @Override
+    public String toString() {
+        return "Deposito{" + "numero=" + numero + ", tama\u00f1o=" + tamaño + ", estantes=" + estantes + ", refrigerado=" + refrigerado + ", ocupado=" + ocupado + '}';
     }
 
    

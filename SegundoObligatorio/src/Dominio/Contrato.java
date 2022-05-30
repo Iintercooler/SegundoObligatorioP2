@@ -1,11 +1,14 @@
 package Dominio;
 
+import java.io.Serializable;
 
-public class Contrato {
+    
+public class Contrato implements Serializable{
     Empleado empleado;
     Cliente cliente;
     Deposito Deposito ;
-    int numeroDeContrato=0;
+    private static int numeroDeContrato=0;
+    
 
     public void setEmpleado(Empleado empleado) {
         this.empleado = empleado;
@@ -19,9 +22,11 @@ public class Contrato {
         this.Deposito = Deposito;
     }
 
-    public void setNumeroDeContrato(int numeroDeContrato) {
-        this.numeroDeContrato = numeroDeContrato;
+    public static void setNumeroDeContrato(int numeroDeContrato) {
+        Contrato.numeroDeContrato = numeroDeContrato;
     }
+
+   
 
     public Empleado getEmpleado() {
         return empleado;
@@ -43,7 +48,12 @@ public class Contrato {
         this.empleado = empleado;
         this.cliente = cliente;
         this.Deposito = Deposito;
-        this.numeroDeContrato = getNumeroDeContrato()+1;
+        setNumeroDeContrato(getNumeroDeContrato()+1);
+    }
+
+    @Override
+    public String toString() {
+        return "Contrato{" + "empleado=" + empleado + ", cliente=" + cliente + ", Deposito=" + Deposito + ", numeroDeContrato=" + numeroDeContrato + '}';
     }
     
     
