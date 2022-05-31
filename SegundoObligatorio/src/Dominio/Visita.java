@@ -2,30 +2,16 @@
 package Dominio;
 
 import java.io.Serializable;
-import java.util.Date;
 
 
 public class Visita implements Serializable{
+    Contrato contrato;
     Deposito deposito;
     Cliente cliente;
     Empleado empleado;
-    Date fecha;
-
-    public void setDeposito(Deposito deposito) {
-        this.deposito = deposito;
-    }
-
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
-    }
-
-    public void setEmpleado(Empleado empleado) {
-        this.empleado = empleado;
-    }
-
-    public void setFecha(Date fecha) {
-        this.fecha = fecha;
-    }
+    int dia;
+    int mes;
+    
 
     public Deposito getDeposito() {
         return deposito;
@@ -39,21 +25,57 @@ public class Visita implements Serializable{
         return empleado;
     }
 
-    public Date getFecha() {
-        return fecha;
+    public int getDia() {
+        return dia;
     }
 
-    public Visita(Deposito deposito, Cliente cliente, Empleado empleado, Date fecha) {
+    public int getMes() {
+        return mes;
+    }
+
+    public void setDeposito(Deposito deposito) {
+        this.deposito = deposito;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
+    public void setEmpleado(Empleado empleado) {
+        this.empleado = empleado;
+    }
+
+    public void setDia(int dia) {
+        this.dia = dia;
+    }
+
+    public void setMes(int mes) {
+        this.mes = mes;
+    }
+
+    public Contrato getContrato() {
+        return contrato;
+    }
+
+    public void setContrato(Contrato contrato) {
+        this.contrato = contrato;
+    }
+
+    public Visita(Deposito deposito, Cliente cliente, Empleado empleado, int dia, int mes,Contrato c) {
+        this.contrato=c;
         this.deposito = deposito;
         this.cliente = cliente;
         this.empleado = empleado;
-        this.fecha = fecha;
+        this.dia = dia;
+        this.mes = mes;
     }
 
     @Override
     public String toString() {
-        return "Visita{" + "deposito=" + deposito + ", cliente=" + cliente + ", empleado=" + empleado + ", fecha=" + fecha + '}';
+        return "Visita{" + "deposito=" + deposito + ", cliente=" + cliente + ", empleado=" + empleado + ", dia=" + dia + ", mes=" + mes + '}';
     }
+
+   
     
     
     

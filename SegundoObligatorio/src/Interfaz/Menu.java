@@ -5,6 +5,7 @@
 package Interfaz;
 
 import Dominio.Sistema;
+import static java.awt.Frame.MAXIMIZED_BOTH;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -20,7 +21,6 @@ public class Menu extends javax.swing.JFrame {
     public Menu(Sistema s) {
         sistema = s;
         initComponents();
-        ListaDepositos.setListData(sistema.getDepositos().toArray());
     }
 
     /**
@@ -34,9 +34,9 @@ public class Menu extends javax.swing.JFrame {
 
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        ListaDepositos = new javax.swing.JList();
+        jSpinner1 = new javax.swing.JSpinner();
         jButton1 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem6 = new javax.swing.JMenuItem();
@@ -44,6 +44,7 @@ public class Menu extends javax.swing.JFrame {
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem8 = new javax.swing.JMenuItem();
+        jMenuItem9 = new javax.swing.JMenuItem();
         jMenuItem5 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
 
@@ -52,13 +53,7 @@ public class Menu extends javax.swing.JFrame {
         jMenuItem4.setText("jMenuItem4");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        ListaDepositos.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
-        jScrollPane1.setViewportView(ListaDepositos);
+        getContentPane().setLayout(null);
 
         jButton1.setText("Cargar la lista");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -66,6 +61,12 @@ public class Menu extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
+        getContentPane().add(jButton1);
+        jButton1.setBounds(1000, 670, 131, 29);
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Interfaz/portada.png"))); // NOI18N
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(0, 0, 810, 486);
 
         jMenu1.setText("File");
 
@@ -109,6 +110,14 @@ public class Menu extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItem8);
 
+        jMenuItem9.setText("Registrar visita");
+        jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem9ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem9);
+
         jMenuItem5.setText("Salir");
         jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -124,26 +133,6 @@ public class Menu extends javax.swing.JFrame {
 
         setJMenuBar(jMenuBar1);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(84, 84, 84))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(33, 33, 33))
-        );
-
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -156,38 +145,55 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        ListaDepositos.setListData(sistema.getEmpleados().toArray());
+        try {
+            sistema.guardarSistema(sistema);
+            System.out.println("Sistema guardado");
+        } catch (IOException ex) {
+            System.out.println("sistema no guardado");
+            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         registrarDeposito v = new registrarDeposito(sistema);
+       v.setExtendedState(MAXIMIZED_BOTH);
         v.setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         registroCliente v = new registroCliente(sistema);
+        v.setExtendedState(MAXIMIZED_BOTH);
         v.setVisible(true);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
         registroEmpleado v =new registroEmpleado(sistema);
+        v.setExtendedState(MAXIMIZED_BOTH);
         v.setVisible(true);
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
        registrarContrato v=new registrarContrato(sistema);
+       v.setExtendedState(MAXIMIZED_BOTH);
        v.setVisible(true);
     }//GEN-LAST:event_jMenuItem7ActionPerformed
 
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
        gestionContratos v= new gestionContratos(sistema);
+       v.setExtendedState(MAXIMIZED_BOTH);
        v.setVisible(true);
     }//GEN-LAST:event_jMenuItem8ActionPerformed
 
+    private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
+        registroVisitas v = new registroVisitas(sistema);
+        v.setVisible(true);
+        
+    }//GEN-LAST:event_jMenuItem9ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JList ListaDepositos;
     private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
@@ -199,6 +205,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JMenuItem jMenuItem9;
+    private javax.swing.JSpinner jSpinner1;
     // End of variables declaration//GEN-END:variables
 }

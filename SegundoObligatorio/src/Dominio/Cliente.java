@@ -20,7 +20,7 @@ public class Cliente extends Persona implements Serializable{
 
     @Override
     public String toString() {
-        return "Cliente{" + "mail=" + mail + '}';
+        return "Cliente{" + "mail=" + mail + '}'+ super.toString();
     }
 
   

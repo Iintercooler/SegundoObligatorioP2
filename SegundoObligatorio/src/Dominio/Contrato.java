@@ -7,7 +7,8 @@ public class Contrato implements Serializable{
     Empleado empleado;
     Cliente cliente;
     Deposito Deposito ;
-    private static int numeroDeContrato=0;
+     private int numero;
+    private static int ProximoNumero;
     
 
     public void setEmpleado(Empleado empleado) {
@@ -22,9 +23,53 @@ public class Contrato implements Serializable{
         this.Deposito = Deposito;
     }
 
-    public static void setNumeroDeContrato(int numeroDeContrato) {
-        Contrato.numeroDeContrato = numeroDeContrato;
+  
+    
+    
+     public Cliente getCliente() {
+        return this.cliente ;
     }
+    
+    
+    
+    
+    
+     public int getNumero() {
+        return numero;
+    }
+
+    public void setNumero(int unNumero) {
+        numero = unNumero;
+    }
+
+    public static int getProximoNumero() {
+        return ProximoNumero;
+    }
+
+    public static void setProximoNumero(int unProximoNumero) {
+        ProximoNumero = unProximoNumero;
+    }
+
+    public Contrato(Empleado empleado, Cliente cliente, Deposito Deposito) {
+       Contrato.setProximoNumero(Contrato.getProximoNumero() + 1);
+        this.empleado = empleado;
+        this.cliente = cliente;
+        this.Deposito = Deposito;
+        
+    }
+
+    @Override
+    public String toString() {
+        return "Contrato{" + "empleado=" + empleado + ", cliente=" + cliente + ", Deposito=" + Deposito + ", numero=" + numero + '}';
+    }
+    
+    
+    
+    
+    
+    
+   
+    
 
    
 
@@ -32,29 +77,17 @@ public class Contrato implements Serializable{
         return empleado;
     }
 
-    public Cliente getCliente() {
-        return cliente;
-    }
+   
 
     public Deposito getDeposito() {
         return Deposito;
     }
 
-    public int getNumeroDeContrato() {
-        return numeroDeContrato;
-    }
+    
 
-    public Contrato(Empleado empleado, Cliente cliente, Deposito Deposito) {
-        this.empleado = empleado;
-        this.cliente = cliente;
-        this.Deposito = Deposito;
-        setNumeroDeContrato(getNumeroDeContrato()+1);
-    }
+   
 
-    @Override
-    public String toString() {
-        return "Contrato{" + "empleado=" + empleado + ", cliente=" + cliente + ", Deposito=" + Deposito + ", numeroDeContrato=" + numeroDeContrato + '}';
-    }
+  
     
     
     

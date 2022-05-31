@@ -117,7 +117,7 @@ public class Sistema implements Serializable {
     public Sistema cargarSistema() {
         Sistema sistema = null;
         try {
-            ObjectInputStream in = new ObjectInputStream(new FileInputStream("datosguardados.ser"));
+            ObjectInputStream in = new ObjectInputStream(new FileInputStream("datosPrueba.ser"));
             sistema = (Sistema) in.readObject();
             in.close();
         } catch (IOException | ClassNotFoundException e) {
@@ -129,7 +129,7 @@ public class Sistema implements Serializable {
 
     public void guardarSistema(Sistema sistema) throws IOException {
         try {
-            ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("datosguardados.ser"));
+            ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("datosPrueba.ser"));
             out.writeObject(sistema);
             out.close();
         } catch (FileNotFoundException ex) {

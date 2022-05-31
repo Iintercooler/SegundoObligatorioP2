@@ -34,7 +34,7 @@ public class Empleado extends Persona implements Serializable{
 
     @Override
     public String toString() {
-        return "Empleado{" + "direccion=" + direccion + ", a\u00f1oDeIngreso=" + añoDeIngreso + '}';
+        return "Empleado{" + "direccion=" + direccion + ", a\u00f1oDeIngreso=" + añoDeIngreso + '}'+super.toString();
     }
     
     
