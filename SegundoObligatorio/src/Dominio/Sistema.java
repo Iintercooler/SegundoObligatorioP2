@@ -10,6 +10,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Stream;
 
 public class Sistema implements Serializable {
 
@@ -30,6 +31,102 @@ public class Sistema implements Serializable {
     public ArrayList<Deposito> getDepositos() {
         return depositos;
     }
+    
+    
+    
+    private ArrayList<Deposito> getDepositosRefri(boolean refrigerado,ArrayList<Deposito> d) {
+        
+        ArrayList<Deposito> refrigerados=new  ArrayList<>();
+        
+        for (int i = 0; i < d.size(); i++) {
+            if((d.get(i).isRefrigerado()==refrigerado)&&( d.get(i).isOcupado() == false)){
+            refrigerados.add(d.get(i));
+            
+            
+            }
+            
+        }
+        
+        
+        return refrigerados;
+    }
+    
+    
+      private ArrayList<Deposito> getDepositosEstantes(boolean estantes,ArrayList<Deposito> d) {
+        
+        ArrayList<Deposito> conestantes=new  ArrayList<>();
+        
+        for (int i = 0; i < getDepositos().size(); i++) {
+            if((d.get(i).isEstantes()==estantes)&&( d.get(i).isOcupado() == false)){
+            conestantes.add(d.get(i));
+            
+            
+            }
+            
+        }
+        
+        
+        return conestantes;
+    }
+      
+      
+       public ArrayList<Deposito> getDepositosCondiciones(boolean estantes,boolean refrigerado,boolean indiferente) {
+           
+           
+            ArrayList<Deposito> cumplen=new  ArrayList<>();
+             ArrayList<Deposito> aux=new  ArrayList<>();
+            ArrayList<Deposito> resu=new  ArrayList<>();
+           
+            
+            if (indiferente){
+            
+           
+            
+            resu= (ArrayList<Deposito>) getDepositos().stream().filter(Deposito -> !Deposito.isOcupado());
+                    }else{
+            
+                
+                
+                cumplen=getDepositosEstantes(estantes,getDepositos());
+                aux=cumplen;
+                resu=getDepositosRefri(refrigerado,aux);
+                
+                
+                
+            
+            
+            
+            }
+            
+            
+            return resu;
+           
+            
+            
+            
+            
+            
+           
+       }
+      
+    
+    
+    
+    
+    
+//      public ArrayList<Deposito> darDepositosCondiciones(boolean estantes,boolean refigerado,int min,int max,boolean indiferenteEst,boolean indiferenteRef) {
+//       Stream<Deposito> depositosLibres = getDepositos().stream().filter(Deposito -> !Deposito.isOcupado() && Deposito.isRefrigerado());
+//  
+//          return depositos;
+//    }
+    
+    
+    
+    
+    
+    
+    
+    
 
     public ArrayList<Cliente> getClientes() {
         return clientes;
@@ -43,6 +140,11 @@ public class Sistema implements Serializable {
         return contratos;
     }
 
+    
+    
+    
+    
+    
     public ArrayList<Visita> getVisitas() {
         return visitas;
     }

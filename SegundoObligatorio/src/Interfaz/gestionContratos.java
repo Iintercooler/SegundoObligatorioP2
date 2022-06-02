@@ -8,11 +8,53 @@ import Dominio.Contrato;
 import Dominio.Deposito;
 import Dominio.Sistema;
 import Dominio.Visita;
+import java.util.ArrayList;
 import java.util.stream.Stream;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 public class gestionContratos extends javax.swing.JFrame {
 
+    DefaultTableModel modelo = new DefaultTableModel();
     Sistema sistema;
+
+    public void cargaAutomatica() {
+
+        Contrato c = (Contrato) ListaContratos.getSelectedValue();
+        informacioCliente.setText(c.getCliente().toString());
+        informacionDeposito.setText(c.getDeposito().toString());
+        informacionEmpleado.setText(c.getEmpleado().toString());
+
+        Stream<Visita> visitasDelContrato = sistema.getVisitas().stream().filter(Visita -> Visita.getContrato().equals(c));
+
+        listaVisitas.setListData(visitasDelContrato.toArray());
+        
+        
+//        ArrayList<Visita> v= new ArrayList<Visita>();
+//        
+//        for (int i = 0; i < visitasDelContrato.toArray().length; i++) {
+//            v.add(visitasDelContrato.toList().get(i));
+//            
+//        }
+//        System.out.println(visitasDelContrato.toString());
+        
+        
+        
+        
+
+//        DefaultTableModel modeloDefault = new DefaultTableModel(new String[]{"Dia", "Mes", "Empleado"}, visitasDelContrato.toArray().length);
+//        TablaInformacion.setModel(modeloDefault);
+//
+//        TableModel modeloDatos = TablaInformacion.getModel();
+//        for (int i = 0; i < v.size(); i++) {
+//            Visita visita = v.get(i);
+//            modeloDatos.setValueAt(visita.getDia(), i, 0);
+//            modeloDatos.setValueAt(visita.getMes(), i, 1);
+//            modeloDatos.setValueAt(visita.getEmpleado().toString(), i, 2);
+//
+//        }
+
+    }
 
     public gestionContratos(Sistema s) {
         this.sistema = s;
@@ -38,10 +80,19 @@ public class gestionContratos extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         listaVisitas = new javax.swing.JList();
         jLabel2 = new javax.swing.JLabel();
+        informacioCliente = new javax.swing.JLabel();
+        informacionEmpleado = new javax.swing.JLabel();
+        informacionDeposito = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        TablaInformacion = new javax.swing.JTable();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        getContentPane().setLayout(null);
 
         jLabel1.setText("Gestion de contrator");
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(128, 17, 129, 16);
 
         ListaContratos.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -55,12 +106,17 @@ public class gestionContratos extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(ListaContratos);
 
+        getContentPane().add(jScrollPane1);
+        jScrollPane1.setBounds(39, 80, 419, 152);
+
         jButton1.setText("Eliminar contrato");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
+        getContentPane().add(jButton1);
+        jButton1.setBounds(118, 250, 152, 29);
 
         listaVisitas.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -69,50 +125,57 @@ public class gestionContratos extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(listaVisitas);
 
-        jLabel2.setText("Visitas de el contrato seleccionado");
+        getContentPane().add(jScrollPane2);
+        jScrollPane2.setBounds(490, 80, 319, 150);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(128, 128, 128)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(39, 39, 39)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 323, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(495, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(54, 54, 54))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(118, 118, 118)
-                .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel2)
-                .addGap(122, 122, 122))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(30, 30, 30)
-                        .addComponent(jButton1)
-                        .addGap(44, 44, 44)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(54, 54, 54)
-                        .addComponent(jLabel2)))
-                .addContainerGap(88, Short.MAX_VALUE))
-        );
+        jLabel2.setText("Visitas de el contrato seleccionado");
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(510, 34, 219, 16);
+
+        informacioCliente.setText("informacionCliente");
+        getContentPane().add(informacioCliente);
+        informacioCliente.setBounds(170, 290, 670, 30);
+
+        informacionEmpleado.setText("InformacionEmpleado");
+        getContentPane().add(informacionEmpleado);
+        informacionEmpleado.setBounds(170, 360, 680, 16);
+
+        informacionDeposito.setText("informacionDeposito");
+        getContentPane().add(informacionDeposito);
+        informacionDeposito.setBounds(170, 330, 680, 16);
+
+        TablaInformacion.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "Dia", "Mes", "Empleado"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.Object.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane3.setViewportView(TablaInformacion);
+
+        getContentPane().add(jScrollPane3);
+        jScrollPane3.setBounds(490, 470, 320, 110);
+
+        jButton2.setText("jButton2");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton2);
+        jButton2.setBounds(270, 460, 97, 29);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -126,12 +189,24 @@ public class gestionContratos extends javax.swing.JFrame {
 
     private void ListaContratosValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_ListaContratosValueChanged
 
-        Contrato c = (Contrato) ListaContratos.getSelectedValue();
+//        Contrato c = (Contrato) ListaContratos.getSelectedValue();
+//        informacioCliente.setText(c.getCliente().toString());
+//        informacionDeposito.setText(c.getDeposito().toString());
+//        informacionEmpleado.setText(c.getEmpleado().toString());
+//
+//        Stream<Visita> visitasDelContrato = sistema.getVisitas().stream().filter(Visita -> Visita.getContrato().equals(c));
+//
+//        listaVisitas.setListData(visitasDelContrato.toArray());
         
-        Stream<Visita> visitasDelContrato = sistema.getVisitas().stream().filter(Visita ->Visita.getContrato().equals(c));
-        
-        listaVisitas.setListData(visitasDelContrato.toArray());
+
+
+
+
     }//GEN-LAST:event_ListaContratosValueChanged
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        cargaAutomatica();
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -139,11 +214,17 @@ public class gestionContratos extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JList ListaContratos;
+    private javax.swing.JTable TablaInformacion;
+    private javax.swing.JLabel informacioCliente;
+    private javax.swing.JLabel informacionDeposito;
+    private javax.swing.JLabel informacionEmpleado;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JList listaVisitas;
     // End of variables declaration//GEN-END:variables
 }

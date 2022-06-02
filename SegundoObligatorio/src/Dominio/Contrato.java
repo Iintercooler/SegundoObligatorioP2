@@ -7,7 +7,7 @@ public class Contrato implements Serializable{
     Empleado empleado;
     Cliente cliente;
     Deposito Deposito ;
-     private int numero;
+    int numero;
     private static int ProximoNumero;
     
 
@@ -60,7 +60,7 @@ public class Contrato implements Serializable{
 
     @Override
     public String toString() {
-        return "Contrato{" + "empleado=" + empleado + ", cliente=" + cliente + ", Deposito=" + Deposito + ", numero=" + numero + '}';
+        return "Contrato Numero " + numero;
     }
     
     

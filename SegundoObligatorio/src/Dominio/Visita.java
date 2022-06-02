@@ -72,7 +72,7 @@ public class Visita implements Serializable{
 
     @Override
     public String toString() {
-        return "Visita{" + "deposito=" + deposito + ", cliente=" + cliente + ", empleado=" + empleado + ", dia=" + dia + ", mes=" + mes + '}';
+        return "empleado=" + empleado.getNombre() + ", dia=" + dia + ", mes=" + mes;
     }
 
    

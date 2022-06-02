@@ -48,6 +48,19 @@ public class Deposito implements Serializable{
     public boolean isOcupado() {
         return ocupado;
     }
+    
+    
+    
+    
+    
+   
+    
+    
+    
+    
+    
+    
+    
 
     public Deposito(int numero, int tamaño, boolean estantes, boolean refrigerado) {
         this.numero = numero;
@@ -59,7 +72,7 @@ public class Deposito implements Serializable{
 
     @Override
     public String toString() {
-        return "Deposito{" + "numero=" + numero + ", tama\u00f1o=" + tamaño + ", estantes=" + estantes + ", refrigerado=" + refrigerado + ", ocupado=" + ocupado + '}';
+        return "Deposito: "+"Num: " + numero + " (" + tamaño +" m2)" +" estantes: " + estantes + " refrigerado:" + refrigerado;
     }
 
    
