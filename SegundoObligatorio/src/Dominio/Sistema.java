@@ -19,7 +19,13 @@ public class Sistema implements Serializable {
     private ArrayList<Empleado> empleados;
     private ArrayList<Contrato> contratos;
     private ArrayList<Visita> visitas;
+    private int cantidadContratos=1;
 
+    public int getCantidadContratos() {
+        return cantidadContratos;
+    }
+
+    
     public Sistema() {
         depositos = new ArrayList<Deposito>();
         clientes = new ArrayList<Cliente>();
@@ -110,23 +116,7 @@ public class Sistema implements Serializable {
        }
       
     
-    
-    
-    
-    
-//      public ArrayList<Deposito> darDepositosCondiciones(boolean estantes,boolean refigerado,int min,int max,boolean indiferenteEst,boolean indiferenteRef) {
-//       Stream<Deposito> depositosLibres = getDepositos().stream().filter(Deposito -> !Deposito.isOcupado() && Deposito.isRefrigerado());
-//  
-//          return depositos;
-//    }
-    
-    
-    
-    
-    
-    
-    
-    
+
 
     public ArrayList<Cliente> getClientes() {
         return clientes;
@@ -140,10 +130,7 @@ public class Sistema implements Serializable {
         return contratos;
     }
 
-    
-    
-    
-    
+
     
     public ArrayList<Visita> getVisitas() {
         return visitas;
@@ -162,6 +149,7 @@ public class Sistema implements Serializable {
     }
 
     public void agregarContrato(Contrato c) {
+        this.cantidadContratos++;
         this.contratos.add(c);
     }
 
@@ -170,7 +158,6 @@ public class Sistema implements Serializable {
     }
 
     public void eliminarContrato(Contrato c) {
-
         this.getContratos().remove(c);
 
     }

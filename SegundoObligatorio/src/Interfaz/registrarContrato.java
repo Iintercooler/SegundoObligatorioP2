@@ -10,12 +10,15 @@ import Dominio.Deposito;
 import Dominio.Empleado;
 import Dominio.Sistema;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.List;
 import java.util.ArrayList;
 import java.util.Vector;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import javax.swing.ButtonModel;
+import javax.swing.DefaultListCellRenderer;
+import javax.swing.JList;
 import javax.swing.JOptionPane;
 
 /**
@@ -73,6 +76,8 @@ public class registrarContrato extends javax.swing.JFrame {
         campoMaximo = new javax.swing.JTextField();
         buscarDeposito = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
+        campoDetalles = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addInputMethodListener(new java.awt.event.InputMethodListener() {
@@ -108,7 +113,7 @@ public class registrarContrato extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton1);
-        jButton1.setBounds(30, 720, 136, 29);
+        jButton1.setBounds(40, 540, 136, 29);
 
         jScrollPane4.setViewportView(ListaEmpleados);
 
@@ -255,16 +260,23 @@ public class registrarContrato extends javax.swing.JFrame {
         jLabel9.setText("Contratos creados");
         getContentPane().add(jLabel9);
         jLabel9.setBounds(430, 580, 310, 16);
+        getContentPane().add(campoDetalles);
+        campoDetalles.setBounds(290, 540, 590, 26);
+
+        jLabel10.setText("Detalles:");
+        getContentPane().add(jLabel10);
+        jLabel10.setBounds(290, 520, 70, 16);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
         try {
 
             if (ListaEmpleados.getSelectedValue() != null && ListaClientes.getSelectedValue() != null) {
 
-                Contrato c = new Contrato((Empleado) ListaEmpleados.getSelectedValue(), (Cliente) ListaClientes.getSelectedValue(), (Deposito) ListaDepositos.getSelectedValue());
+                Contrato c = new Contrato((Empleado) ListaEmpleados.getSelectedValue(), (Cliente) ListaClientes.getSelectedValue(), (Deposito) ListaDepositos.getSelectedValue(), campoDetalles.getText(), sistema.getCantidadContratos());
                 c.getDeposito().setOcupado(true);
                 sistema.agregarContrato(c);
 
@@ -272,13 +284,16 @@ public class registrarContrato extends javax.swing.JFrame {
                 ListaDepositos.setListData(depsitosDesocupados.toArray());
                 ListaContratos.setListData(sistema.getContratos().toArray());
 
-            }else{ JOptionPane.showConfirmDialog(null, "Deben seleccionar un Empleado y un cliente", "Error", JOptionPane.ERROR_MESSAGE);}
+            } else {
+                JOptionPane.showConfirmDialog(null, "Deben seleccionar un Empleado y un cliente", "Error", JOptionPane.ERROR_MESSAGE);
+            }
 
 
     }//GEN-LAST:event_jButton1ActionPerformed
   catch (Exception e) {
             JOptionPane.showConfirmDialog(null, "Deben seleccionar almenos un deposito", "Error", JOptionPane.ERROR_MESSAGE);
         }
+
     }
 
 
@@ -381,10 +396,31 @@ public class registrarContrato extends javax.swing.JFrame {
             Stream<Deposito> todosLosDepositos = sistema.getDepositos().stream().filter(Deposito -> {
                 return (Deposito.isRefrigerado() == conRefrigeracion.isSelected() && (Deposito.isEstantes() == conEstantes.isSelected()) && Deposito.getTamaño() >= Integer.parseInt(campoMinimo.getText()) && Deposito.getTamaño() <= Integer.parseInt(campoMaximo.getText()));
             });
-
-            ListaDepositos.setListData(todosLosDepositos.toArray());
-
+     ListaDepositos.setListData(todosLosDepositos.toArray());
+          
         }
+//     ListaDepositos.getSelectedIndices() //retrona array de int 
+            ListaDepositos.setCellRenderer(new DefaultListCellRenderer() {
+
+                public Component getListCellRendererComponent(JList list, Object value, int index,boolean isSelected, boolean cellHasFocus) {
+                    Component c = super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+//                    if (value instanceof User) {
+//                        User nextUser = (User) value;
+//                        setText(nextUser.name);
+//                        if (nextUser.loggedIn) {
+                            setBackground(Color.GREEN);
+//                        } else {
+//                            setBackground(Color.RED);
+//                        }
+                        if (isSelected) {
+                            setBackground(getBackground().darker());
+                        }
+        //            } 
+                    return c;
+                }
+
+            });
+
     }
 
 
@@ -396,6 +432,7 @@ public class registrarContrato extends javax.swing.JFrame {
     private javax.swing.JList ListaEmpleados;
     private javax.swing.ButtonGroup Refrigeracion;
     private javax.swing.JButton buscarDeposito;
+    private javax.swing.JTextField campoDetalles;
     private javax.swing.JTextField campoMaximo;
     private javax.swing.JTextField campoMinimo;
     private javax.swing.JRadioButton conEstantes;
@@ -404,6 +441,7 @@ public class registrarContrato extends javax.swing.JFrame {
     private javax.swing.JRadioButton indiferenteRefrigeracion;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

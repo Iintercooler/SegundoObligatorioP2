@@ -8,7 +8,8 @@ public class Contrato implements Serializable{
     Cliente cliente;
     Deposito Deposito ;
     int numero;
-    private static int ProximoNumero;
+    String detalles;
+    
     
 
     public void setEmpleado(Empleado empleado) {
@@ -29,6 +30,14 @@ public class Contrato implements Serializable{
      public Cliente getCliente() {
         return this.cliente ;
     }
+
+    public String getDetalles() {
+        return detalles;
+    }
+
+    public void setDetalles(String detalles) {
+        this.detalles = detalles;
+    }
     
     
     
@@ -42,25 +51,21 @@ public class Contrato implements Serializable{
         numero = unNumero;
     }
 
-    public static int getProximoNumero() {
-        return ProximoNumero;
-    }
+    
 
-    public static void setProximoNumero(int unProximoNumero) {
-        ProximoNumero = unProximoNumero;
-    }
-
-    public Contrato(Empleado empleado, Cliente cliente, Deposito Deposito) {
-       Contrato.setProximoNumero(Contrato.getProximoNumero() + 1);
+  
+    public Contrato(Empleado empleado, Cliente cliente, Deposito Deposito,String detalles,int numero) {
+        this.numero=numero;
         this.empleado = empleado;
         this.cliente = cliente;
         this.Deposito = Deposito;
+        this.detalles=detalles;
         
     }
 
     @Override
     public String toString() {
-        return "Contrato Numero " + numero;
+        return "Contrato Numero " + numero+ "Detalles: " + detalles;
     }
     
     

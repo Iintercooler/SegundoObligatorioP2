@@ -10,6 +10,7 @@ import Dominio.Sistema;
 import Dominio.Visita;
 import java.util.ArrayList;
 import java.util.stream.Stream;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
@@ -26,33 +27,20 @@ public class gestionContratos extends javax.swing.JFrame {
         informacionEmpleado.setText(c.getEmpleado().toString());
 
         Stream<Visita> visitasDelContrato = sistema.getVisitas().stream().filter(Visita -> Visita.getContrato().equals(c));
-
+//
         listaVisitas.setListData(visitasDelContrato.toArray());
-        
-        
-//        ArrayList<Visita> v= new ArrayList<Visita>();
 //        
-//        for (int i = 0; i < visitasDelContrato.toArray().length; i++) {
-//            v.add(visitasDelContrato.toList().get(i));
-//            
-//        }
-//        System.out.println(visitasDelContrato.toString());
-        
-        
-        
-        
+//        
 
-//        DefaultTableModel modeloDefault = new DefaultTableModel(new String[]{"Dia", "Mes", "Empleado"}, visitasDelContrato.toArray().length);
-//        TablaInformacion.setModel(modeloDefault);
-//
-//        TableModel modeloDatos = TablaInformacion.getModel();
-//        for (int i = 0; i < v.size(); i++) {
-//            Visita visita = v.get(i);
-//            modeloDatos.setValueAt(visita.getDia(), i, 0);
-//            modeloDatos.setValueAt(visita.getMes(), i, 1);
-//            modeloDatos.setValueAt(visita.getEmpleado().toString(), i, 2);
-//
-//        }
+        ArrayList<Visita> v = new ArrayList<Visita>();
+//        
+        for (int i = 0; i < visitasDelContrato.toArray().length; i++) {
+            v.add(visitasDelContrato.toList().get(i));
+
+        }
+        System.out.println(visitasDelContrato.toString());
+//        
+
 
     }
 
@@ -166,16 +154,16 @@ public class gestionContratos extends javax.swing.JFrame {
         jScrollPane3.setViewportView(TablaInformacion);
 
         getContentPane().add(jScrollPane3);
-        jScrollPane3.setBounds(490, 470, 320, 110);
+        jScrollPane3.setBounds(520, 280, 320, 110);
 
-        jButton2.setText("jButton2");
+        jButton2.setText("CArgar la maldita tabla");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
         getContentPane().add(jButton2);
-        jButton2.setBounds(270, 460, 97, 29);
+        jButton2.setBounds(270, 460, 188, 29);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -189,23 +177,58 @@ public class gestionContratos extends javax.swing.JFrame {
 
     private void ListaContratosValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_ListaContratosValueChanged
 
-//        Contrato c = (Contrato) ListaContratos.getSelectedValue();
-//        informacioCliente.setText(c.getCliente().toString());
-//        informacionDeposito.setText(c.getDeposito().toString());
-//        informacionEmpleado.setText(c.getEmpleado().toString());
-//
-//        Stream<Visita> visitasDelContrato = sistema.getVisitas().stream().filter(Visita -> Visita.getContrato().equals(c));
-//
-//        listaVisitas.setListData(visitasDelContrato.toArray());
-        
+        try {
+            Contrato c = (Contrato) ListaContratos.getSelectedValue();
+            informacioCliente.setText(c.getCliente().toString());
+            informacionDeposito.setText(c.getDeposito().toString());
+            informacionEmpleado.setText(c.getEmpleado().toString());
 
+            Stream<Visita> visitasDelContrato = sistema.getVisitas().stream().filter(Visita -> Visita.getContrato().equals(c));
 
+            listaVisitas.setListData(visitasDelContrato.toArray());
+
+        } catch (Exception e) {
+            
+        }
 
 
     }//GEN-LAST:event_ListaContratosValueChanged
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        cargaAutomatica();
+         Contrato c = (Contrato) ListaContratos.getSelectedValue();
+            informacioCliente.setText(c.getCliente().toString());
+            informacionDeposito.setText(c.getDeposito().toString());
+            informacionEmpleado.setText(c.getEmpleado().toString());
+
+            Stream<Visita> visitasDelContrato = sistema.getVisitas().stream().filter(Visita -> Visita.getContrato().equals(c));
+
+            listaVisitas.setListData(visitasDelContrato.toArray());
+        
+        
+        
+         Object[] v= visitasDelContrato.toArray().clone();
+        
+//        for (int i = 0; i < visitasDelContrato.toArray().length; i++) {
+//            v.add(visitasDelContrato.toList().get(i));
+//            
+//        }
+        
+        
+        
+//        DefaultTableModel modeloDefault = new DefaultTableModel(new String[]{"Dia", "Mes", "Empleado"}, v.length);
+//        TablaInformacion.setModel(modeloDefault);
+//
+//    
+//        
+//        
+//        
+//        TableModel modeloDatos = TablaInformacion.getModel();
+//        for (int i = 0; i < v.size(); i++) {
+//            Visita visita = v.get(i);
+//            modeloDatos.setValueAt(visita.getDia(), i, 0);
+//            modeloDatos.setValueAt(visita.getMes(), i, 1);
+//            modeloDatos.setValueAt(visita.getEmpleado().toString(), i, 2);
+//        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
