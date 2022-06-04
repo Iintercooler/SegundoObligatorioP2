@@ -12,11 +12,11 @@ import javax.swing.JOptionPane;
  *
  * @author fgavello
  */
-public class registroEmpleado extends javax.swing.JFrame {
+public class RegistroEmpleado extends javax.swing.JFrame {
 
     Sistema sistema;
 
-    public registroEmpleado(Sistema s) {
+    public RegistroEmpleado(Sistema s) {
         this.sistema = s;
         initComponents();
     }

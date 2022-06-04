@@ -8,11 +8,11 @@ import Dominio.Cliente;
 import Dominio.Sistema;
 import javax.swing.JOptionPane;
 
-public class registroCliente extends javax.swing.JFrame {
+public class RegistroCliente extends javax.swing.JFrame {
 
     Sistema sistema;
 
-    public registroCliente(Sistema s) {
+    public RegistroCliente(Sistema s) {
         this.sistema = s;
          initComponents();
     }

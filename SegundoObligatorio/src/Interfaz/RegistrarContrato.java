@@ -26,11 +26,11 @@ import javax.swing.ListSelectionModel;
  *
  * @author fgavello
  */
-public class registrarContrato extends javax.swing.JFrame {
+public class RegistrarContrato extends javax.swing.JFrame {
 
     Sistema sistema;
 
-    public registrarContrato(Sistema s) {
+    public RegistrarContrato(Sistema s) {
         this.sistema = s;
 
         initComponents();
@@ -38,9 +38,8 @@ public class registrarContrato extends javax.swing.JFrame {
         ListaDepositos.setListData(depsitosDesocupados.toArray());
         ListaEmpleados.setListData(sistema.getEmpleados().toArray());
         ListaDepositos.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
-//        recargarListaDepositos();
         ListaClientes.setListData(sistema.getClientes().toArray());
-
+        pintarJlist();
     }
 
     @SuppressWarnings("unchecked")
@@ -401,7 +400,15 @@ public class registrarContrato extends javax.swing.JFrame {
 
         }
 //     ListaDepositos.getSelectedIndices() //retrona array de int 
-        ListaDepositos.setCellRenderer(new DefaultListCellRenderer() {
+       pintarJlist();
+    }
+
+    
+    
+    private void pintarJlist(){
+    
+    
+     ListaDepositos.setCellRenderer(new DefaultListCellRenderer() {
 
             public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
                 Component c = super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
@@ -430,8 +437,17 @@ public class registrarContrato extends javax.swing.JFrame {
 
         });
 
+    
+    
+    
+    
+    
+    
+    
+    
+    
     }
-
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup Estantes;

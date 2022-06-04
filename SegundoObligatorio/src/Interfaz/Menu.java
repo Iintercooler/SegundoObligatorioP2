@@ -171,37 +171,37 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        registrarDeposito v = new registrarDeposito(sistema);
+        RegistrarDeposito v = new RegistrarDeposito(sistema);
         v.setExtendedState(MAXIMIZED_BOTH);
         v.setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        registroCliente v = new registroCliente(sistema);
+        RegistroCliente v = new RegistroCliente(sistema);
         v.setExtendedState(MAXIMIZED_BOTH);
         v.setVisible(true);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
-        registroEmpleado v = new registroEmpleado(sistema);
+        RegistroEmpleado v = new RegistroEmpleado(sistema);
         v.setExtendedState(MAXIMIZED_BOTH);
         v.setVisible(true);
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
-        registrarContrato v = new registrarContrato(sistema);
+        RegistrarContrato v = new RegistrarContrato(sistema);
         v.setExtendedState(MAXIMIZED_BOTH);
         v.setVisible(true);
     }//GEN-LAST:event_jMenuItem7ActionPerformed
 
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
-        gestionContratos v = new gestionContratos(sistema);
+        GestionContrato v = new GestionContrato(sistema);
         v.setExtendedState(MAXIMIZED_BOTH);
         v.setVisible(true);
     }//GEN-LAST:event_jMenuItem8ActionPerformed
 
     private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
-        registroVisitas v = new registroVisitas(sistema);
+        RegistroVisita v = new RegistroVisita(sistema);
         
         v.setVisible(true);
 

@@ -12,11 +12,11 @@ import Dominio.Sistema;
 import Dominio.Visita;
 import java.util.stream.Stream;
 
-public class registroVisitas extends javax.swing.JFrame {
+public class RegistroVisita extends javax.swing.JFrame {
     
     Sistema sistema;
     
-    public registroVisitas(Sistema s) {
+    public RegistroVisita(Sistema s) {
         this.sistema = s;
         
         initComponents();
@@ -185,7 +185,7 @@ public class registroVisitas extends javax.swing.JFrame {
         int mes = Integer.parseInt(campoMes.getText());
         Visita v = new Visita(d, cl, e, dia, mes,c);
         sistema.agregarVisita(v);
-        System.out.println("Visita agregara"+v);
+        
 
     }//GEN-LAST:event_jButton1ActionPerformed
 

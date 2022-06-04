@@ -3,6 +3,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package Interfaz;
+
+import Dominio.ArchivoGrabacion;
 import Dominio.Contrato;
 import Dominio.Sistema;
 import Dominio.Visita;
@@ -12,7 +14,7 @@ import java.util.stream.Stream;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
-public class gestionContratos extends javax.swing.JFrame {
+public class GestionContrato extends javax.swing.JFrame {
 
     DefaultTableModel modelo = new DefaultTableModel();
     Sistema sistema;
@@ -40,8 +42,7 @@ public class gestionContratos extends javax.swing.JFrame {
 ////        
 //
 //    }
-
-    public gestionContratos(Sistema s) {
+    public GestionContrato(Sistema s) {
         this.sistema = s;
 
         initComponents();
@@ -139,26 +140,38 @@ public class gestionContratos extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
+        Contrato c = (Contrato) ListaContratos.getSelectedValue();
+        String nombre = c.getCliente().getNombre();
+        String numero = String.valueOf(c.getNumero());
+        String nombreArch = nombre + " " + numero;
+        ArchivoGrabacion arch2 = new ArchivoGrabacion(nombreArch, false);
+        Stream<Visita> visitasDelContrato = sistema.getVisitas().stream().filter(Visita -> Visita.getContrato().equals(c));
+        ArrayList<Visita> v = visitasDelContrato.collect(Collectors.toCollection(ArrayList::new));
+        for (int i = 0; i < v.size(); i++) {
+            arch2.grabarLinea(v.get(i).toString());
+        }
+
+        arch2.cerrar();
+
         sistema.actualizarEstadoDeposito((Contrato) ListaContratos.getSelectedValue());
         eliminarVisitas();
         sistema.eliminarContrato((Contrato) ListaContratos.getSelectedValue());
-        
+
         recargarListaContratos();
         DefaultTableModel modeloDefault = new DefaultTableModel(new String[]{"Dia", "Mes", "Empleado"}, 1);
         TablaInformacion.setModel(modeloDefault);
-        
-        
-        
+
         informacioCliente.setText("Datos del Cliente:");
         informacionDeposito.setText("Datos del Deposito:");
         informacionEmpleado.setText("Datos del Empleado:");
-        
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void ListaContratosValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_ListaContratosValueChanged
 
         try {
-          cargarTabla();
+            cargarTabla();
 
         } catch (Exception e) {
 
@@ -167,40 +180,37 @@ public class gestionContratos extends javax.swing.JFrame {
 
     }//GEN-LAST:event_ListaContratosValueChanged
 
-    
-    private void eliminarVisitas(){
-      Contrato c = (Contrato) ListaContratos.getSelectedValue();
-      Stream<Visita> visitasDelContrato = sistema.getVisitas().stream().filter(Visita -> Visita.getContrato().equals(c));
-      ArrayList<Visita> v = visitasDelContrato.collect(Collectors.toCollection(ArrayList::new));
+    private void eliminarVisitas() {
+        Contrato c = (Contrato) ListaContratos.getSelectedValue();
+        Stream<Visita> visitasDelContrato = sistema.getVisitas().stream().filter(Visita -> Visita.getContrato().equals(c));
+        ArrayList<Visita> v = visitasDelContrato.collect(Collectors.toCollection(ArrayList::new));
         for (int i = 0; i < v.size(); i++) {
             sistema.eliminarVisita(v.get(i));
         }
- 
+
     }
-    
-    
-    private void cargarTabla(){
-     Contrato c = (Contrato) ListaContratos.getSelectedValue();
-        
+
+    private void cargarTabla() {
+        Contrato c = (Contrato) ListaContratos.getSelectedValue();
+
         informacioCliente.setText(c.getCliente().toString());
         informacionDeposito.setText(c.getDeposito().toString());
         informacionEmpleado.setText(c.getEmpleado().toString());
 
         Stream<Visita> visitasDelContrato = sistema.getVisitas().stream().filter(Visita -> Visita.getContrato().equals(c));
-       
+
         ArrayList<Visita> v = visitasDelContrato.collect(Collectors.toCollection(ArrayList::new));
-        
+
         DefaultTableModel modeloDefault = new DefaultTableModel(new String[]{"Dia", "Mes", "Empleado"}, v.size());
         TablaInformacion.setModel(modeloDefault);
         TableModel modeloDatos = TablaInformacion.getModel();
-        
+
         for (int i = 0; i < v.size(); i++) {
             modeloDatos.setValueAt(v.get(i).getDia(), i, 0);
             modeloDatos.setValueAt(v.get(i).getMes(), i, 1);
             modeloDatos.setValueAt(v.get(i).getEmpleado().getNombre(), i, 2);
         }
-    
-    
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
