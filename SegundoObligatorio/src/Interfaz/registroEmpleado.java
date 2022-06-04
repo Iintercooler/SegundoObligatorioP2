@@ -5,7 +5,6 @@
 package Interfaz;
 
 import Dominio.Empleado;
-import Dominio.Persona;
 import Dominio.Sistema;
 import javax.swing.JOptionPane;
 
@@ -140,18 +139,18 @@ public class registroEmpleado extends javax.swing.JFrame {
             String cedula = CampoCedula.getText();
             String telefono = CampoTelefono.getText();
             int añoDeIngreso = Integer.parseInt(CampoFecha.getText());
-            Persona p= new Empleado(direccion, añoDeIngreso, nombre, cedula, telefono);
+//            Persona p= new Empleado(direccion, añoDeIngreso, nombre, cedula, telefono);
             Empleado e = new Empleado(direccion, añoDeIngreso, nombre, cedula, telefono);
-            if (!sistema.existeEmpleado(e)) {
+            if (!sistema.existePersona(cedula)) {
                 sistema.agregarEmpleado(e);
-                 JOptionPane.showMessageDialog(null, "Empelado registrado", "Exitoso", JOptionPane.ERROR_MESSAGE);
+                 JOptionPane.showMessageDialog(null, "Empelado registrado", "Exitoso", JOptionPane.YES_OPTION);
 
             } else {
-                JOptionPane.showMessageDialog(null, "El Empleado ya esta en el sistema", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Esta persona ya esta en el sistema", "Error", JOptionPane.ERROR_MESSAGE);
             }
 
         } catch (NumberFormatException e) {
-            JOptionPane.showConfirmDialog(null, "Los campos no son correctos", "Error", JOptionPane.CANCEL_OPTION);
+            JOptionPane.showConfirmDialog(null, "Los campos no son correctos", "Error", JOptionPane.ERROR_MESSAGE);
         }
         
         

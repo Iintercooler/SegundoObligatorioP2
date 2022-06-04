@@ -170,27 +170,53 @@ public class Sistema implements Serializable {
     
     }
 
-    public boolean existeCliente(Cliente c) {
-        boolean resu = false;
-        for (int i = 0; i < this.getClientes().size() && !resu; i++) {
-            if (this.getClientes().get(i).getCedula().equals(c.getCedula())) {
+//    public boolean existeCliente(Cliente c) {
+//        boolean resu = false;
+//        for (int i = 0; i < this.getClientes().size() && !resu; i++) {
+//            if (Integer.parseInt(this.getClientes().get(i).getCedula())==Integer.parseInt(c.getCedula())) {
+//                resu = true;
+//            }
+//        }
+//        return resu;
+//
+//    }
+
+    
+    public boolean existePersona(String cedula){
+         boolean resu = false;
+        
+         for (int i = 0; i < this.getEmpleados().size() && !resu; i++) {
+            if (Integer.parseInt(this.getEmpleados().get(i).getCedula())==Integer.parseInt(cedula)) {
                 resu = true;
+               
             }
         }
-        return resu;
-
-    }
-
-    public boolean existeEmpleado(Empleado e) {
-        boolean resu = false;
-        for (int i = 0; i < this.getEmpleados().size() && !resu; i++) {
-            if (this.getEmpleados().get(i).getCedula().equals(e.getCedula())) {
+        
+         for (int i = 0; i < this.getClientes().size() && !resu; i++) {
+            if (Integer.parseInt(this.getClientes().get(i).getCedula())==Integer.parseInt(cedula)) {
                 resu = true;
+               
             }
         }
-        return resu;
-
+    
+    
+    return resu;
+    
     }
+    
+    
+    
+    
+//    public boolean existeEmpleado(Empleado e) {
+//        boolean resu = false;
+//        for (int i = 0; i < this.getEmpleados().size() && !resu; i++) {
+//            if (Integer.parseInt(this.getEmpleados().get(i).getCedula())==Integer.parseInt(e.getCedula())) {
+//                resu = true;
+//            }
+//        }
+//        return resu;
+//
+//    }
 
     public boolean existeDeposito(Deposito d) {
         boolean resu = false;

@@ -20,6 +20,7 @@ import javax.swing.ButtonModel;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
+import javax.swing.ListSelectionModel;
 
 /**
  *
@@ -31,13 +32,15 @@ public class registrarContrato extends javax.swing.JFrame {
 
     public registrarContrato(Sistema s) {
         this.sistema = s;
+
         initComponents();
         Stream<Deposito> depsitosDesocupados = sistema.getDepositos().stream().filter(Deposito -> !Deposito.isOcupado());
         ListaDepositos.setListData(depsitosDesocupados.toArray());
         ListaEmpleados.setListData(sistema.getEmpleados().toArray());
+        ListaDepositos.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 //        recargarListaDepositos();
         ListaClientes.setListData(sistema.getClientes().toArray());
-        ListaContratos.setListData(sistema.getContratos().toArray());
+
     }
 
     @SuppressWarnings("unchecked")
@@ -56,8 +59,6 @@ public class registrarContrato extends javax.swing.JFrame {
         ListaDepositos = new javax.swing.JList();
         jScrollPane6 = new javax.swing.JScrollPane();
         ListaClientes = new javax.swing.JList();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        ListaContratos = new javax.swing.JList();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         conEstantes = new javax.swing.JRadioButton();
@@ -75,7 +76,6 @@ public class registrarContrato extends javax.swing.JFrame {
         campoMinimo = new javax.swing.JTextField();
         campoMaximo = new javax.swing.JTextField();
         buscarDeposito = new javax.swing.JButton();
-        jLabel9 = new javax.swing.JLabel();
         campoDetalles = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
 
@@ -113,7 +113,7 @@ public class registrarContrato extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton1);
-        jButton1.setBounds(40, 540, 136, 29);
+        jButton1.setBounds(70, 610, 136, 29);
 
         jScrollPane4.setViewportView(ListaEmpleados);
 
@@ -134,11 +134,6 @@ public class registrarContrato extends javax.swing.JFrame {
 
         getContentPane().add(jScrollPane6);
         jScrollPane6.setBounds(900, 40, 300, 200);
-
-        jScrollPane2.setViewportView(ListaContratos);
-
-        getContentPane().add(jScrollPane2);
-        jScrollPane2.setBounds(240, 620, 900, 100);
 
         jLabel4.setText("Requisitos de depositos");
         getContentPane().add(jLabel4);
@@ -256,16 +251,12 @@ public class registrarContrato extends javax.swing.JFrame {
         });
         getContentPane().add(buscarDeposito);
         buscarDeposito.setBounds(50, 370, 200, 80);
-
-        jLabel9.setText("Contratos creados");
-        getContentPane().add(jLabel9);
-        jLabel9.setBounds(430, 580, 310, 16);
         getContentPane().add(campoDetalles);
-        campoDetalles.setBounds(290, 540, 590, 26);
+        campoDetalles.setBounds(280, 600, 590, 50);
 
         jLabel10.setText("Detalles:");
         getContentPane().add(jLabel10);
-        jLabel10.setBounds(290, 520, 70, 16);
+        jLabel10.setBounds(290, 570, 70, 16);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -276,13 +267,23 @@ public class registrarContrato extends javax.swing.JFrame {
 
             if (ListaEmpleados.getSelectedValue() != null && ListaClientes.getSelectedValue() != null) {
 
-                Contrato c = new Contrato((Empleado) ListaEmpleados.getSelectedValue(), (Cliente) ListaClientes.getSelectedValue(), (Deposito) ListaDepositos.getSelectedValue(), campoDetalles.getText(), sistema.getCantidadContratos());
+                Object[] values = ListaDepositos.getSelectedValuesList().toArray();
+                Deposito[] d = new Deposito[values.length];
+                for (int i = 0; i < values.length; i++) {
+                    if (values[i] instanceof Deposito) {
+                        d[i] = ((Deposito) values[i]);
+                    }
+                }
+                
+                for (int i = 0; i < d.length; i++) {
+                Contrato c = new Contrato((Empleado) ListaEmpleados.getSelectedValue(), (Cliente) ListaClientes.getSelectedValue(), d[i], campoDetalles.getText(), sistema.getCantidadContratos());
                 c.getDeposito().setOcupado(true);
                 sistema.agregarContrato(c);
-
+                }
+ 
                 Stream<Deposito> depsitosDesocupados = sistema.getDepositos().stream().filter(Deposito -> !Deposito.isOcupado());
                 ListaDepositos.setListData(depsitosDesocupados.toArray());
-                ListaContratos.setListData(sistema.getContratos().toArray());
+                JOptionPane.showConfirmDialog(null, "Contratos Creados", "Exito", JOptionPane.DEFAULT_OPTION);
 
             } else {
                 JOptionPane.showConfirmDialog(null, "Deben seleccionar un Empleado y un cliente", "Error", JOptionPane.ERROR_MESSAGE);
@@ -396,30 +397,30 @@ public class registrarContrato extends javax.swing.JFrame {
             Stream<Deposito> todosLosDepositos = sistema.getDepositos().stream().filter(Deposito -> {
                 return (Deposito.isRefrigerado() == conRefrigeracion.isSelected() && (Deposito.isEstantes() == conEstantes.isSelected()) && Deposito.getTamaño() >= Integer.parseInt(campoMinimo.getText()) && Deposito.getTamaño() <= Integer.parseInt(campoMaximo.getText()));
             });
-     ListaDepositos.setListData(todosLosDepositos.toArray());
-          
+            ListaDepositos.setListData(todosLosDepositos.toArray());
+
         }
 //     ListaDepositos.getSelectedIndices() //retrona array de int 
-            ListaDepositos.setCellRenderer(new DefaultListCellRenderer() {
+        ListaDepositos.setCellRenderer(new DefaultListCellRenderer() {
 
-                public Component getListCellRendererComponent(JList list, Object value, int index,boolean isSelected, boolean cellHasFocus) {
-                    Component c = super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+            public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
+                Component c = super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
 //                    if (value instanceof User) {
 //                        User nextUser = (User) value;
 //                        setText(nextUser.name);
 //                        if (nextUser.loggedIn) {
-                            setBackground(Color.GREEN);
+                setBackground(Color.GREEN);
 //                        } else {
 //                            setBackground(Color.RED);
 //                        }
-                        if (isSelected) {
-                            setBackground(getBackground().darker());
-                        }
-        //            } 
-                    return c;
+                if (isSelected) {
+                    setBackground(getBackground().darker());
                 }
+                //            } 
+                return c;
+            }
 
-            });
+        });
 
     }
 
@@ -427,7 +428,6 @@ public class registrarContrato extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup Estantes;
     private javax.swing.JList ListaClientes;
-    private javax.swing.JList ListaContratos;
     private javax.swing.JList ListaDepositos;
     private javax.swing.JList ListaEmpleados;
     private javax.swing.ButtonGroup Refrigeracion;
@@ -449,11 +449,9 @@ public class registrarContrato extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JRadioButton jRadioButton4;
     private javax.swing.JRadioButton jRadioButton5;
     private javax.swing.JRadioButton jRadioButton7;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
