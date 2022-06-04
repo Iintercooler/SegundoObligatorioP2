@@ -140,8 +140,9 @@ public class gestionContratos extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         sistema.actualizarEstadoDeposito((Contrato) ListaContratos.getSelectedValue());
+        eliminarVisitas();
         sistema.eliminarContrato((Contrato) ListaContratos.getSelectedValue());
-
+        
         recargarListaContratos();
         DefaultTableModel modeloDefault = new DefaultTableModel(new String[]{"Dia", "Mes", "Empleado"}, 1);
         TablaInformacion.setModel(modeloDefault);
@@ -166,6 +167,18 @@ public class gestionContratos extends javax.swing.JFrame {
 
     }//GEN-LAST:event_ListaContratosValueChanged
 
+    
+    private void eliminarVisitas(){
+      Contrato c = (Contrato) ListaContratos.getSelectedValue();
+      Stream<Visita> visitasDelContrato = sistema.getVisitas().stream().filter(Visita -> Visita.getContrato().equals(c));
+      ArrayList<Visita> v = visitasDelContrato.collect(Collectors.toCollection(ArrayList::new));
+        for (int i = 0; i < v.size(); i++) {
+            sistema.eliminarVisita(v.get(i));
+        }
+ 
+    }
+    
+    
     private void cargarTabla(){
      Contrato c = (Contrato) ListaContratos.getSelectedValue();
         

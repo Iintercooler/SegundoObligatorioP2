@@ -156,6 +156,11 @@ public class Sistema implements Serializable {
     public void agregarVisita(Visita v) {
         this.visitas.add(v);
     }
+    
+    
+    public void eliminarVisita(Visita v){
+    this.visitas.remove(v);
+    }
 
     public void eliminarContrato(Contrato c) {
         this.getContratos().remove(c);

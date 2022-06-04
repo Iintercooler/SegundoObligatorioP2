@@ -274,13 +274,13 @@ public class registrarContrato extends javax.swing.JFrame {
                         d[i] = ((Deposito) values[i]);
                     }
                 }
-                
+
                 for (int i = 0; i < d.length; i++) {
-                Contrato c = new Contrato((Empleado) ListaEmpleados.getSelectedValue(), (Cliente) ListaClientes.getSelectedValue(), d[i], campoDetalles.getText(), sistema.getCantidadContratos());
-                c.getDeposito().setOcupado(true);
-                sistema.agregarContrato(c);
+                    Contrato c = new Contrato((Empleado) ListaEmpleados.getSelectedValue(), (Cliente) ListaClientes.getSelectedValue(), d[i], campoDetalles.getText(), sistema.getCantidadContratos());
+                    c.getDeposito().setOcupado(true);
+                    sistema.agregarContrato(c);
                 }
- 
+
                 Stream<Deposito> depsitosDesocupados = sistema.getDepositos().stream().filter(Deposito -> !Deposito.isOcupado());
                 ListaDepositos.setListData(depsitosDesocupados.toArray());
                 JOptionPane.showConfirmDialog(null, "Contratos Creados", "Exito", JOptionPane.DEFAULT_OPTION);
@@ -405,18 +405,26 @@ public class registrarContrato extends javax.swing.JFrame {
 
             public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
                 Component c = super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
-//                    if (value instanceof User) {
-//                        User nextUser = (User) value;
-//                        setText(nextUser.name);
-//                        if (nextUser.loggedIn) {
-                setBackground(Color.GREEN);
-//                        } else {
-//                            setBackground(Color.RED);
-//                        }
+                    if (value instanceof Deposito) {
+                        Deposito d = (Deposito) value;
+//                       
+                        if (d.isEstantes() && d.isRefrigerado()) {
+                            setBackground(Color.GREEN);
+                        } 
+                        if (d.isEstantes() && !d.isRefrigerado()) {
+                            setBackground(Color.ORANGE);
+                        } 
+                        if (!d.isEstantes() && d.isRefrigerado()) {
+                            setBackground(Color.YELLOW);
+                        } 
+                        if (!d.isEstantes() && !d.isRefrigerado()) {
+                            setBackground(Color.blue);
+                        } 
+                        
                 if (isSelected) {
                     setBackground(getBackground().darker());
                 }
-                //            } 
+                            } 
                 return c;
             }
 
