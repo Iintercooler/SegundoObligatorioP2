@@ -375,7 +375,7 @@ public class RegistrarContrato extends javax.swing.JFrame {
 
         if (indiferenteRefrigeracion.isSelected() && !indiferenteEstantes.isSelected()) {
             Stream<Deposito> depsitosRefrigerados = sistema.getDepositos().stream().filter(Deposito -> {
-                return (Deposito.isEstantes() == conEstantes.isSelected() && Deposito.getTamaño() >= Integer.parseInt(campoMinimo.getText()) && Deposito.getTamaño() <= Integer.parseInt(campoMaximo.getText()));
+                return (Deposito.isEstantes() == conEstantes.isSelected()  && !Deposito.isOcupado() && Deposito.getTamaño() >= Integer.parseInt(campoMinimo.getText()) && Deposito.getTamaño() <= Integer.parseInt(campoMaximo.getText()) );
             });
 
             ListaDepositos.setListData(depsitosRefrigerados.toArray());
@@ -384,7 +384,7 @@ public class RegistrarContrato extends javax.swing.JFrame {
 
         if (indiferenteEstantes.isSelected() && !indiferenteRefrigeracion.isSelected()) {
             Stream<Deposito> todosLosDepositos = sistema.getDepositos().stream().filter(Deposito -> {
-                return (Deposito.isRefrigerado() == conRefrigeracion.isSelected() && Deposito.getTamaño() >= Integer.parseInt(campoMinimo.getText()) && Deposito.getTamaño() <= Integer.parseInt(campoMaximo.getText()));
+                return (Deposito.isRefrigerado() == conRefrigeracion.isSelected() && !Deposito.isOcupado()&& Deposito.getTamaño() >= Integer.parseInt(campoMinimo.getText()) && Deposito.getTamaño() <= Integer.parseInt(campoMaximo.getText()));
             });
 
             ListaDepositos.setListData(todosLosDepositos.toArray());
@@ -394,7 +394,7 @@ public class RegistrarContrato extends javax.swing.JFrame {
         if (!indiferenteEstantes.isSelected() && !indiferenteRefrigeracion.isSelected()) {
 
             Stream<Deposito> todosLosDepositos = sistema.getDepositos().stream().filter(Deposito -> {
-                return (Deposito.isRefrigerado() == conRefrigeracion.isSelected() && (Deposito.isEstantes() == conEstantes.isSelected()) && Deposito.getTamaño() >= Integer.parseInt(campoMinimo.getText()) && Deposito.getTamaño() <= Integer.parseInt(campoMaximo.getText()));
+                return (Deposito.isRefrigerado() == conRefrigeracion.isSelected() &&!Deposito.isOcupado() && (Deposito.isEstantes() == conEstantes.isSelected()) && Deposito.getTamaño() >= Integer.parseInt(campoMinimo.getText()) && Deposito.getTamaño() <= Integer.parseInt(campoMaximo.getText()));
             });
             ListaDepositos.setListData(todosLosDepositos.toArray());
 

@@ -10,10 +10,7 @@ import java.util.logging.Logger;
 public class ArchivoGrabacion {
     private Formatter out;
     
-    
-    
-    
-    
+
     public ArchivoGrabacion(String unNombre, boolean ext){
         try {
             // SI EXT ES FALSE ES FALSE SE SOBRE ESCRIBE, SI ES TRUE SE EXTIENDE

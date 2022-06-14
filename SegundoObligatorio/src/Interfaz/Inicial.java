@@ -100,14 +100,23 @@ public class Inicial extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         Sistema s = new Sistema();
         this.sistema = s;
+        
         JFileChooser selectorArchivos = new JFileChooser();
+        
         selectorArchivos.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+        
         int resultado = selectorArchivos.showOpenDialog(this);
+        
         File archivo = selectorArchivos.getSelectedFile(); // obtiene el archivo seleccionado
+       
         if ((archivo == null) || (archivo.getName().equals(""))) {
+            
             JOptionPane.showMessageDialog(this, "Nombre de archivo inválido", "Nombre de archivo inválido", JOptionPane.ERROR_MESSAGE);
         }
-        ArchivoLectura arch = new ArchivoLectura(archivo.getName());
+        
+//        System.out.println(archivo.getName());
+        ArchivoLectura arch = new ArchivoLectura(archivo.getAbsolutePath());
+       
         while (arch.hayMasLineas()) {
             String[] linea = arch.linea().split("#");
             int numero = Integer.parseInt(linea[0]);
