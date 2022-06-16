@@ -52,9 +52,14 @@ public class Deposito implements Serializable{
     
     
     
-    
+    public Deposito() {
+        this.numero = 0;
+        this.tamaño = 0;
+        this.estantes = false;
+        this.refrigerado = false;
+        this.ocupado = false;
    
-    
+    }
     
     
     
@@ -72,7 +77,24 @@ public class Deposito implements Serializable{
 
     @Override
     public String toString() {
-        return "Deposito: "+"Num: " + numero + " (" + tamaño +" m2)" +" estantes: " + estantes + " refrigerado:" + refrigerado;
+        String estatesStr;
+        String refrigeradoStr;
+        if (estantes){
+            estatesStr=" Con estantes ";
+        
+        }else{
+        estatesStr=" Sin estantes ";
+        }
+        
+        if (refrigerado){
+        refrigeradoStr="Con refrigeracion";
+        
+        }else{
+        refrigeradoStr="Sin refrigeracion";
+        }
+        
+        
+        return "Deposito: "+"Num: " + numero + ", (" + tamaño +" m2)," +estatesStr+"," +refrigeradoStr;
     }
 
    

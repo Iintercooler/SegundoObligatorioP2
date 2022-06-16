@@ -9,6 +9,10 @@ public class Contrato implements Serializable{
     Deposito Deposito ;
     int numero;
     String detalles;
+
+    public Contrato() {
+    
+    }
     
     
 
@@ -65,7 +69,7 @@ public class Contrato implements Serializable{
 
     @Override
     public String toString() {
-        return "Contrato Numero " + numero+ "Detalles: " + detalles;
+        return "Contrato Numero " + numero+ ", Detalles: " + detalles;
     }
     
     
