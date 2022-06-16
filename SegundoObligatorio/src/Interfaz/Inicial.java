@@ -89,12 +89,14 @@ public class Inicial extends javax.swing.JFrame {
         Sistema s = new Sistema();
         this.sistema = s;
         Menu v = new Menu(sistema);
+          v.setExtendedState(MAXIMIZED_BOTH);
         v.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         this.sistema = sistema.cargarSistema();
         Menu v = new Menu(sistema);
+          v.setExtendedState(MAXIMIZED_BOTH);
         v.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -140,6 +142,7 @@ public class Inicial extends javax.swing.JFrame {
         }
         arch.cerrar();
         Menu v = new Menu(sistema);
+        v.setExtendedState(MAXIMIZED_BOTH);
         v.setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
 

@@ -39,9 +39,7 @@ public class ConsultaDepositos extends javax.swing.JFrame {
             String[] linea = cual.getText().split(":");
             int numero = Integer.parseInt(linea[1]);
             Deposito d = traerDatos(numero);
-            Contrato c=traerContrato(numero);
-            System.out.println(d.isOcupado());
-            System.out.println(d.getNumero());
+            Contrato c=traerContrato(numero);            
             if(d.isOcupado()){
             JOptionPane.showMessageDialog(null, d.toString()+" "+"\n"
                     +c.toString() +"\n"
@@ -130,6 +128,7 @@ public class ConsultaDepositos extends javax.swing.JFrame {
         });
         panelDepositos.setLayout(new java.awt.GridLayout());
 
+        scroll.setLocation(new java.awt.Point(500, 500));
         scroll.setPreferredSize(new java.awt.Dimension(5000, 5000));
 
         jLabel1.setText("Consulta de Depositos");
@@ -176,7 +175,7 @@ public class ConsultaDepositos extends javax.swing.JFrame {
             b.setMargin(new Insets(-5, -5, -5, -5));
             b.setBackground(Color.BLACK);
             b.setForeground(Color.BLACK);
-            b.setText("Num:" + depositos.get(i).getNumero()); // texto ejemplo, a completar
+            b.setText("Num:" + depositos.get(i).getNumero()); 
 
             if (depositos.get(i).isOcupado()) {
 
@@ -191,7 +190,6 @@ public class ConsultaDepositos extends javax.swing.JFrame {
 
         }
         scroll.add(panelDepositos);
-
     }
 
     /**

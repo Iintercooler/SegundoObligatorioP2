@@ -40,10 +40,10 @@ public class RegistrarDeposito extends javax.swing.JFrame {
         CheckRefrigerado = new javax.swing.JCheckBox();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        Salir = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        getContentPane().setLayout(null);
 
         botonRegistratDeposito.setText("Registrar");
         botonRegistratDeposito.addActionListener(new java.awt.event.ActionListener() {
@@ -51,12 +51,18 @@ public class RegistrarDeposito extends javax.swing.JFrame {
                 botonRegistratDepositoActionPerformed(evt);
             }
         });
+        getContentPane().add(botonRegistratDeposito);
+        botonRegistratDeposito.setBounds(167, 241, 100, 29);
+        getContentPane().add(MetrosDeposito);
+        MetrosDeposito.setBounds(116, 80, 92, 26);
 
         NumeroDeposito.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 NumeroDepositoActionPerformed(evt);
             }
         });
+        getContentPane().add(NumeroDeposito);
+        NumeroDeposito.setBounds(116, 48, 92, 26);
 
         CheckEstantes.setText("Estantes");
         CheckEstantes.addActionListener(new java.awt.event.ActionListener() {
@@ -64,73 +70,24 @@ public class RegistrarDeposito extends javax.swing.JFrame {
                 CheckEstantesActionPerformed(evt);
             }
         });
+        getContentPane().add(CheckEstantes);
+        CheckEstantes.setBounds(116, 158, 85, 23);
 
         CheckRefrigerado.setText("Refrigerado");
+        getContentPane().add(CheckRefrigerado);
+        CheckRefrigerado.setBounds(116, 129, 104, 23);
 
         jLabel1.setText("Numero");
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(23, 53, 50, 16);
 
         jLabel2.setText("Metros");
-
-        Salir.setText("Salir");
-        Salir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                SalirActionPerformed(evt);
-            }
-        });
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(30, 85, 43, 16);
 
         jLabel3.setText("Registro de depositos");
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(23, 23, 23)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2))
-                        .addGap(43, 43, 43)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(CheckRefrigerado)
-                            .addComponent(MetrosDeposito, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(NumeroDeposito, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(CheckEstantes, javax.swing.GroupLayout.Alignment.LEADING)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(167, 167, 167)
-                        .addComponent(botonRegistratDeposito)
-                        .addGap(18, 18, 18)
-                        .addComponent(Salir)))
-                .addContainerGap(40, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(97, 97, 97))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(14, 14, 14)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(NumeroDeposito, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(MetrosDeposito, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addGap(23, 23, 23)
-                .addComponent(CheckRefrigerado)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(CheckEstantes)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(botonRegistratDeposito)
-                    .addComponent(Salir))
-                .addGap(30, 30, 30))
-        );
+        getContentPane().add(jLabel3);
+        jLabel3.setBounds(104, 6, 199, 28);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -146,7 +103,7 @@ public class RegistrarDeposito extends javax.swing.JFrame {
             Deposito d = new Deposito(numero, metros, CheckEstantes.isSelected(),CheckRefrigerado.isSelected());
             if (!sistema.existeDeposito(d)) {
                 sistema.agregarDeposito(d);
-                 
+                 JOptionPane.showMessageDialog(null, "Deposito agregado", "Registro Exitoso", -1);
             } else {
                 JOptionPane.showMessageDialog(null, "el deposito ya existe", "error", JOptionPane.ERROR_MESSAGE);
             }
@@ -166,16 +123,6 @@ public class RegistrarDeposito extends javax.swing.JFrame {
 
     }//GEN-LAST:event_NumeroDepositoActionPerformed
 
-    private void SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SalirActionPerformed
-       
-        try {
-            sistema.guardarSistema(sistema);
-        } catch (IOException ex) {
-            Logger.getLogger(RegistrarDeposito.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-    }//GEN-LAST:event_SalirActionPerformed
-
  
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -183,7 +130,6 @@ public class RegistrarDeposito extends javax.swing.JFrame {
     private javax.swing.JCheckBox CheckRefrigerado;
     private javax.swing.JTextField MetrosDeposito;
     private javax.swing.JTextField NumeroDeposito;
-    private javax.swing.JButton Salir;
     private javax.swing.JButton botonRegistratDeposito;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

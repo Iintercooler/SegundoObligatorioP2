@@ -264,7 +264,7 @@ public class RegistrarContrato extends javax.swing.JFrame {
 
         try {
 
-            if (ListaEmpleados.getSelectedValue() != null && ListaClientes.getSelectedValue() != null) {
+            if (ListaEmpleados.getSelectedValue() != null && ListaClientes.getSelectedValue() != null && ListaDepositos.getSelectedValue()!=null && !campoDetalles.getText().equalsIgnoreCase("")) {
 
                 Object[] values = ListaDepositos.getSelectedValuesList().toArray();
                 Deposito[] d = new Deposito[values.length];
@@ -285,7 +285,7 @@ public class RegistrarContrato extends javax.swing.JFrame {
                 JOptionPane.showConfirmDialog(null, "Contratos Creados", "Exito", JOptionPane.DEFAULT_OPTION);
 
             } else {
-                JOptionPane.showConfirmDialog(null, "Deben seleccionar un Empleado y un cliente", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showConfirmDialog(null, "Deben seleccionar un Empleado, un Cliente, un Deposito e indicar detalles del contrato", "Error", JOptionPane.ERROR_MESSAGE);
             }
 
 
@@ -317,7 +317,7 @@ public class RegistrarContrato extends javax.swing.JFrame {
             recargarListaDepositosConCondiciones();
 
         } catch (NumberFormatException e) {
-            JOptionPane.showConfirmDialog(null, "Deben ser campos numericos", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showConfirmDialog(null, "Debe ingresar los tamaños de busqueda", "Error", JOptionPane.ERROR_MESSAGE);
         }
 
 //        if (indiferenteRefrigeracion.isSelected() && !indiferenteEstantes.isSelected()) {

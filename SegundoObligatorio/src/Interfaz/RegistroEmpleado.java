@@ -43,22 +43,43 @@ public class RegistroEmpleado extends javax.swing.JFrame {
         AgregarEmpleado = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        getContentPane().setLayout(null);
 
         CampoNombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CampoNombreActionPerformed(evt);
             }
         });
+        getContentPane().add(CampoNombre);
+        CampoNombre.setBounds(202, 35, 128, 26);
+        getContentPane().add(CampoCedula);
+        CampoCedula.setBounds(202, 73, 128, 26);
+        getContentPane().add(CampoTelefono);
+        CampoTelefono.setBounds(202, 105, 128, 26);
 
         jLabel1.setText("Nombre");
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(134, 40, 50, 16);
 
         jLabel2.setText("Cedula");
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(141, 73, 43, 16);
 
         jLabel3.setText("Telefono");
+        getContentPane().add(jLabel3);
+        jLabel3.setBounds(129, 110, 55, 16);
+        getContentPane().add(CampoFecha);
+        CampoFecha.setBounds(202, 143, 128, 26);
+        getContentPane().add(CampoDireccion);
+        CampoDireccion.setBounds(202, 187, 128, 26);
 
         jLabel5.setText("Año de ingreso");
+        getContentPane().add(jLabel5);
+        jLabel5.setBounds(89, 143, 95, 16);
 
         jLabel6.setText("Direccion");
+        getContentPane().add(jLabel6);
+        jLabel6.setBounds(124, 187, 60, 16);
 
         AgregarEmpleado.setText("Agregar empleado");
         AgregarEmpleado.addActionListener(new java.awt.event.ActionListener() {
@@ -66,63 +87,8 @@ public class RegistroEmpleado extends javax.swing.JFrame {
                 AgregarEmpleadoActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(89, 89, 89)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel5)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel6)))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(CampoDireccion)
-                    .addComponent(CampoNombre, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(CampoTelefono, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(CampoCedula, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE)
-                    .addComponent(CampoFecha, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 122, Short.MAX_VALUE)
-                .addComponent(AgregarEmpleado)
-                .addGap(120, 120, 120))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(35, 35, 35)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(CampoNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(CampoCedula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(CampoTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel5)
-                    .addComponent(CampoFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel6)
-                    .addComponent(CampoDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(AgregarEmpleado)
-                .addContainerGap(40, Short.MAX_VALUE))
-        );
+        getContentPane().add(AgregarEmpleado);
+        AgregarEmpleado.setBounds(122, 231, 158, 29);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -143,7 +109,7 @@ public class RegistroEmpleado extends javax.swing.JFrame {
             Empleado e = new Empleado(direccion, añoDeIngreso, nombre, cedula, telefono);
             if (!sistema.existePersona(cedula)) {
                 sistema.agregarEmpleado(e);
-                 JOptionPane.showMessageDialog(null, "Empelado registrado", "Exitoso", JOptionPane.YES_OPTION);
+                 JOptionPane.showMessageDialog(null, "Empelado registrado", "Exitoso", -1);
 
             } else {
                 JOptionPane.showMessageDialog(null, "Esta persona ya esta en el sistema", "Error", JOptionPane.ERROR_MESSAGE);
