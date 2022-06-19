@@ -10,10 +10,12 @@ import Dominio.Deposito;
 import Dominio.Empleado;
 import Dominio.Sistema;
 import Dominio.Visita;
+import java.util.Observable;
+import java.util.Observer;
 import java.util.stream.Stream;
 import javax.swing.JOptionPane;
 
-public class RegistroVisita extends javax.swing.JFrame {
+public class RegistroVisita extends javax.swing.JFrame implements Observer {
 
     Sistema sistema;
 
@@ -23,6 +25,7 @@ public class RegistroVisita extends javax.swing.JFrame {
         initComponents();
         listaEmpleados.setListData(sistema.getEmpleados().toArray());
         listaClientes.setListData(sistema.getClientes().toArray());
+        sistema.addObserver(this);
     }
 
     @SuppressWarnings("unchecked")
@@ -166,4 +169,11 @@ public class RegistroVisita extends javax.swing.JFrame {
     private javax.swing.JList listaContratos;
     private javax.swing.JList listaEmpleados;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void update(Observable o, Object o1) {
+        listaEmpleados.setListData(sistema.getEmpleados().toArray());
+        listaClientes.setListData(sistema.getClientes().toArray());
+        System.out.println("se elimio un contrato de cliente");
+    }
 }

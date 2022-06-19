@@ -1,8 +1,9 @@
 package Dominio;
 
 import java.io.Serializable;
+import java.util.Comparator;
 
-public class Deposito implements Serializable{
+public class Deposito implements Serializable, Comparable<Deposito>{
     int numero;
     int tamaño;
     boolean estantes;
@@ -97,6 +98,18 @@ public class Deposito implements Serializable{
         return "Deposito: "+"Num: " + numero + ", (" + tamaño +" m2)," +estatesStr+"," +refrigeradoStr;
     }
 
-   
+   @Override
+    public int compareTo(Deposito o) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+    
+    public static class Comparators {
+        public static Comparator<Deposito> NUMERO = new Comparator<Deposito>() {
+            @Override
+            public int compare(Deposito o1, Deposito o2) {
+                return o1.numero - o2.numero;
+            }
+        };
+    }
     
 }

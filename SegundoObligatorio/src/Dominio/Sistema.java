@@ -11,8 +11,11 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Stream;
+import java.util.Observable;
+import java.util.Observer;
 
-public class Sistema implements Serializable {
+
+public class Sistema extends Observable implements Serializable{
 
     private ArrayList<Deposito> depositos;
     private ArrayList<Cliente> clientes;
@@ -21,6 +24,8 @@ public class Sistema implements Serializable {
     private ArrayList<Visita> visitas;
     private int cantidadContratos=1;
 
+    private Observer observer;
+    
     public int getCantidadContratos() {
         return cantidadContratos;
     }
@@ -138,23 +143,28 @@ public class Sistema implements Serializable {
 
     public void agregarDeposito(Deposito d) {
         this.depositos.add(d);
+        notifyObservers();
     }
 
     public void agragarCliente(Cliente c) {
         this.clientes.add(c);
+        notifyObservers();
     }
 
     public void agregarEmpleado(Empleado e) {
         this.empleados.add(e);
+        notifyObservers();
     }
 
     public void agregarContrato(Contrato c) {
         this.cantidadContratos++;
         this.contratos.add(c);
+        notifyObservers();
     }
 
     public void agregarVisita(Visita v) {
         this.visitas.add(v);
+        notifyObservers();
     }
     
     
@@ -164,6 +174,7 @@ public class Sistema implements Serializable {
 
     public void eliminarContrato(Contrato c) {
         this.getContratos().remove(c);
+        notifyObservers();
 
     }
     
@@ -211,17 +222,7 @@ public class Sistema implements Serializable {
     
     
     
-    
-//    public boolean existeEmpleado(Empleado e) {
-//        boolean resu = false;
-//        for (int i = 0; i < this.getEmpleados().size() && !resu; i++) {
-//            if (Integer.parseInt(this.getEmpleados().get(i).getCedula())==Integer.parseInt(e.getCedula())) {
-//                resu = true;
-//            }
-//        }
-//        return resu;
-//
-//    }
+
 
     public boolean existeDeposito(Deposito d) {
         boolean resu = false;
@@ -260,4 +261,22 @@ public class Sistema implements Serializable {
 
     }
 
+    
+    
+    @Override
+    public void addObserver(Observer observer){
+    this.observer=observer;
+    
+    }
+    
+    public void notifyObservers(){
+    if (observer!= null){
+    
+    observer.update(this, this);
+    
+    
+    }
+    }
+    
+    
 }

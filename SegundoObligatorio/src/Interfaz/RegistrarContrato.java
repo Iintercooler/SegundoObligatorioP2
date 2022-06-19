@@ -13,6 +13,7 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.List;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Vector;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -34,6 +35,7 @@ public class RegistrarContrato extends javax.swing.JFrame {
         this.sistema = s;
 
         initComponents();
+        ordenarLista();
         Stream<Deposito> depsitosDesocupados = sistema.getDepositos().stream().filter(Deposito -> !Deposito.isOcupado());
         ListaDepositos.setListData(depsitosDesocupados.toArray());
         ListaEmpleados.setListData(sistema.getEmpleados().toArray());
@@ -283,7 +285,7 @@ public class RegistrarContrato extends javax.swing.JFrame {
                 Stream<Deposito> depsitosDesocupados = sistema.getDepositos().stream().filter(Deposito -> !Deposito.isOcupado());
                 ListaDepositos.setListData(depsitosDesocupados.toArray());
                 JOptionPane.showConfirmDialog(null, "Contratos Creados", "Exito", JOptionPane.DEFAULT_OPTION);
-
+               sistema.notifyObservers();
             } else {
                 JOptionPane.showConfirmDialog(null, "Deben seleccionar un Empleado, un Cliente, un Deposito e indicar detalles del contrato", "Error", JOptionPane.ERROR_MESSAGE);
             }
@@ -364,6 +366,14 @@ public class RegistrarContrato extends javax.swing.JFrame {
 
     }//GEN-LAST:event_indiferenteEstantesStateChanged
 
+    
+    private void ordenarLista(){
+        Collections.sort(sistema.getDepositos(), Deposito.Comparators.NUMERO);
+    }
+    
+    
+    
+    
     private void recargarListaDepositosConCondiciones() {
 // Funciones Lambda Epicas para filtrar By fundamentos de computacion!
         if (indiferenteEstantes.isSelected() && indiferenteRefrigeracion.isSelected()) {

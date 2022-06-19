@@ -216,6 +216,7 @@ public class Menu extends javax.swing.JFrame {
         Graficas v= new Graficas(sistema);
         v.setExtendedState(MAXIMIZED_BOTH);
         v.setVisible(true);
+//        sistema.addObserver(v);
         
     }//GEN-LAST:event_jMenuItem10ActionPerformed
 

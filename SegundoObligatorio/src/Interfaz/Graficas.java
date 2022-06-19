@@ -4,20 +4,28 @@ import Dominio.Deposito;
 import Dominio.Sistema;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.util.Observable;
+import java.util.Observer;
 import java.util.stream.Stream;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.data.general.DefaultPieDataset;
 
-public class Graficas extends javax.swing.JFrame {
+public class Graficas extends javax.swing.JFrame implements Observer {
 
     Sistema sistema;
 
     public Graficas(Sistema s) {
         this.sistema = s;
         initComponents();
+//        sistema.addObserver(this);
+        reload();
+    
 
+    }
+
+    private void reload() {
         Stream<Deposito> depositosNoNo = sistema.getDepositos().stream().filter(Deposito -> Deposito.isOcupado() && !Deposito.isEstantes() && !Deposito.isRefrigerado());
         Stream<Deposito> depositosNoSi = sistema.getDepositos().stream().filter(Deposito -> Deposito.isOcupado() && !Deposito.isEstantes() && Deposito.isRefrigerado());
         Stream<Deposito> depositosSiNo = sistema.getDepositos().stream().filter(Deposito -> Deposito.isOcupado() && Deposito.isEstantes() && !Deposito.isRefrigerado());
@@ -50,10 +58,8 @@ public class Graficas extends javax.swing.JFrame {
         Jpanel.add(panel, BorderLayout.NORTH);
         pack();
         repaint();
-
     }
 
-   
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -108,4 +114,11 @@ public class Graficas extends javax.swing.JFrame {
     private javax.swing.JPanel Jpanel;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void update(Observable o, Object o1) {
+        this.reload();
+        System.out.println("recaragar grafica");
+        
+    }
 }
