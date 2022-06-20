@@ -20,29 +20,7 @@ public class GestionContrato extends javax.swing.JFrame {
     DefaultTableModel modelo = new DefaultTableModel();
     Sistema sistema;
 
-//    public void cargaAutomatica() {
-//
-//        Contrato c = (Contrato) ListaContratos.getSelectedValue();
-//        informacioCliente.setText(c.getCliente().toString());
-//        informacionDeposito.setText(c.getDeposito().toString());
-//        informacionEmpleado.setText(c.getEmpleado().toString());
-//
-//        Stream<Visita> visitasDelContrato = sistema.getVisitas().stream().filter(Visita -> Visita.getContrato().equals(c));
-////
-//        listaVisitas.setListData(visitasDelContrato.toArray());
-////        
-////        
-//
-//        ArrayList<Visita> v = new ArrayList<Visita>();
-////        
-//        for (int i = 0; i < visitasDelContrato.toArray().length; i++) {
-//            v.add(visitasDelContrato.toList().get(i));
-//
-//        }
-//        System.out.println(visitasDelContrato.toString());
-////        
-//
-//    }
+
     public GestionContrato(Sistema s) {
         this.sistema = s;
 
@@ -145,10 +123,14 @@ public class GestionContrato extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Debe seleccionar un contrato", "Consulta", JOptionPane.ERROR_MESSAGE);
 
         } else {
+            
+            
             Contrato c = (Contrato) ListaContratos.getSelectedValue();
+            
             String nombre = c.getCliente().getNombre();
             String numero = String.valueOf(c.getNumero());
             String nombreArch = nombre + " " + numero;
+            
             ArchivoGrabacion arch2 = new ArchivoGrabacion(nombreArch, false);
             Stream<Visita> visitasDelContrato = sistema.getVisitas().stream().filter(Visita -> Visita.getContrato().equals(c));
             ArrayList<Visita> v = visitasDelContrato.collect(Collectors.toCollection(ArrayList::new));

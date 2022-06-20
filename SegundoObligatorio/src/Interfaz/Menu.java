@@ -159,13 +159,15 @@ public class Menu extends javax.swing.JFrame {
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
         try {
             sistema.guardarSistema(sistema);
-            System.out.println("Sistema Guardado");
+           System.exit(WIDTH);
+           
         } catch (IOException ex) {
             Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+       try{
         try {
             sistema.guardarSistema(sistema);
             System.out.println("Sistema guardado");
@@ -173,8 +175,14 @@ public class Menu extends javax.swing.JFrame {
             System.out.println("sistema no guardado");
             Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
         }
+       }catch(Exception e){
+           System.out.println("Debe cerrar todas las ventanas para guardar el sistema sin salir");
+       
+       
+       }
     }//GEN-LAST:event_jButton1ActionPerformed
-
+    
+       
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         RegistrarDeposito v = new RegistrarDeposito(sistema);
         v.setExtendedState(MAXIMIZED_BOTH);
@@ -216,7 +224,6 @@ public class Menu extends javax.swing.JFrame {
         Graficas v= new Graficas(sistema);
         v.setExtendedState(MAXIMIZED_BOTH);
         v.setVisible(true);
-//        sistema.addObserver(v);
         
     }//GEN-LAST:event_jMenuItem10ActionPerformed
 

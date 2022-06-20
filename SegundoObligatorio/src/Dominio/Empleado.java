@@ -28,8 +28,8 @@ public class Empleado extends Persona implements Serializable{
 
     public Empleado(String direccion, int añoDeIngreso, String nombre, String cedula, String telefono) {
         super(nombre, cedula, telefono);
-        this.direccion = direccion;
-        this.añoDeIngreso = añoDeIngreso;
+        this.setDireccion(direccion);
+        this.setAñoDeIngreso(añoDeIngreso);
     }
 
     @Override

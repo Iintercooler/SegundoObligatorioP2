@@ -61,14 +61,16 @@ public class Visita implements Serializable{
         this.contrato = contrato;
     }
 
-    public Visita(Deposito deposito, Cliente cliente, Empleado empleado, int dia, int mes,Contrato c) {
-        this.contrato=c;
+    public Visita(Contrato contrato, Deposito deposito, Cliente cliente, Empleado empleado, int dia, int mes) {
+        this.contrato = contrato;
         this.deposito = deposito;
         this.cliente = cliente;
         this.empleado = empleado;
         this.dia = dia;
         this.mes = mes;
     }
+
+  
 
     @Override
     public String toString() {

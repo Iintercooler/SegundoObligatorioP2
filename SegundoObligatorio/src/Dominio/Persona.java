@@ -32,9 +32,9 @@ public class Persona implements Serializable{
     }
 
     public Persona(String nombre, String cedula, String telefono) {
-        this.nombre = nombre;
-        this.cedula = cedula;
-        this.telefono = telefono;
+        this.setNombre(nombre);
+        this.setCedula(cedula);
+        this.setTelefono(telefono);
     }
 
     @Override

@@ -109,8 +109,12 @@ public class RegistroEmpleado extends javax.swing.JFrame {
             Empleado e = new Empleado(direccion, añoDeIngreso, nombre, cedula, telefono);
             if (!sistema.existePersona(cedula)) {
                 sistema.agregarEmpleado(e);
-                 JOptionPane.showMessageDialog(null, "Empelado registrado", "Exitoso", -1);
-
+                JOptionPane.showMessageDialog(null, "Empelado registrado", "Exitoso", -1);
+                CampoDireccion.setText(" ");
+                CampoNombre.setText(" ");
+                CampoCedula.setText(" ");
+                CampoTelefono.setText(" ");
+                CampoFecha.setText(" ");
             } else {
                 JOptionPane.showMessageDialog(null, "Esta persona ya esta en el sistema", "Error", JOptionPane.ERROR_MESSAGE);
             }
@@ -118,9 +122,6 @@ public class RegistroEmpleado extends javax.swing.JFrame {
         } catch (NumberFormatException e) {
             JOptionPane.showConfirmDialog(null, "Los campos no son correctos", "Error", JOptionPane.ERROR_MESSAGE);
         }
-        
-        
-        
 
 
     }//GEN-LAST:event_AgregarEmpleadoActionPerformed

@@ -20,60 +20,45 @@
     <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
   </AuxValues>
 
-  <Layout>
-    <DimensionLayout dim="0">
-      <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" attributes="0">
-              <EmptySpace min="170" pref="170" max="-2" attributes="0"/>
-              <Component id="jLabel1" min="-2" pref="190" max="-2" attributes="0"/>
-          </Group>
-          <Group type="102" attributes="0">
-              <EmptySpace min="40" pref="40" max="-2" attributes="0"/>
-              <Component id="panelDepositos" min="-2" pref="310" max="-2" attributes="0"/>
-          </Group>
-          <Component id="scroll" pref="510" max="32767" attributes="0"/>
-      </Group>
-    </DimensionLayout>
-    <DimensionLayout dim="1">
-      <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" attributes="0">
-              <EmptySpace min="20" pref="20" max="-2" attributes="0"/>
-              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="44" pref="44" max="-2" attributes="0"/>
-              <Component id="panelDepositos" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
-              <Component id="scroll" pref="180" max="32767" attributes="0"/>
-          </Group>
-      </Group>
-    </DimensionLayout>
+  <Layout class="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout">
+    <Property name="useNullLayout" type="boolean" value="true"/>
   </Layout>
   <SubComponents>
-    <Container class="javax.swing.JPanel" name="panelDepositos">
-      <Events>
-        <EventHandler event="componentAdded" listener="java.awt.event.ContainerListener" parameters="java.awt.event.ContainerEvent" handler="panelDepositosComponentAdded"/>
-      </Events>
-
-      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
-        <Property name="columns" type="int" value="0"/>
-        <Property name="rows" type="int" value="1"/>
-      </Layout>
-    </Container>
     <Container class="java.awt.ScrollPane" name="scroll">
       <Properties>
-        <Property name="location" type="java.awt.Point" editor="org.netbeans.beaninfo.editors.PointEditor">
-          <Point value="[500, 500]"/>
-        </Property>
         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
           <Dimension value="[5000, 5000]"/>
         </Property>
       </Properties>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="0" y="90" width="510" height="180"/>
+        </Constraint>
+      </Constraints>
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.ScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Container class="javax.swing.JPanel" name="panelDepositos">
+          <Events>
+            <EventHandler event="componentAdded" listener="java.awt.event.ContainerListener" parameters="java.awt.event.ContainerEvent" handler="panelDepositosComponentAdded"/>
+          </Events>
+
+          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
+            <Property name="columns" type="int" value="0"/>
+            <Property name="rows" type="int" value="1"/>
+          </Layout>
+        </Container>
+      </SubComponents>
     </Container>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
         <Property name="text" type="java.lang.String" value="Consulta de Depositos"/>
       </Properties>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="170" y="20" width="190" height="-1"/>
+        </Constraint>
+      </Constraints>
     </Component>
   </SubComponents>
 </Form>

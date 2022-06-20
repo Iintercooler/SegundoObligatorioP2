@@ -69,11 +69,11 @@ public class Deposito implements Serializable, Comparable<Deposito>{
     
 
     public Deposito(int numero, int tamaño, boolean estantes, boolean refrigerado) {
-        this.numero = numero;
-        this.tamaño = tamaño;
-        this.estantes = estantes;
-        this.refrigerado = refrigerado;
-        this.ocupado = false;
+        this.setNumero(numero);
+        this.setTamaño(tamaño);
+        this.setEstantes(estantes);
+        this.setRefrigerado(refrigerado);
+        this.setOcupado(ocupado);
     }
 
     @Override

@@ -24,7 +24,7 @@ public class Sistema extends Observable implements Serializable{
     private ArrayList<Visita> visitas;
     private int cantidadContratos=1;
 
-    private Observer observer;
+    private ArrayList<Observer> observer;
     
     public int getCantidadContratos() {
         return cantidadContratos;
@@ -32,6 +32,7 @@ public class Sistema extends Observable implements Serializable{
 
     
     public Sistema() {
+        observer = new ArrayList<Observer>();
         depositos = new ArrayList<Deposito>();
         clientes = new ArrayList<Cliente>();
         empleados = new ArrayList<Empleado>();
@@ -186,23 +187,15 @@ public class Sistema extends Observable implements Serializable{
     
     }
 
-//    public boolean existeCliente(Cliente c) {
-//        boolean resu = false;
-//        for (int i = 0; i < this.getClientes().size() && !resu; i++) {
-//            if (Integer.parseInt(this.getClientes().get(i).getCedula())==Integer.parseInt(c.getCedula())) {
-//                resu = true;
-//            }
-//        }
-//        return resu;
-//
-//    }
+
 
     
     public boolean existePersona(String cedula){
          boolean resu = false;
         
          for (int i = 0; i < this.getEmpleados().size() && !resu; i++) {
-            if (Integer.parseInt(this.getEmpleados().get(i).getCedula())==Integer.parseInt(cedula)) {
+            
+             if (Integer.parseInt(this.getEmpleados().get(i).getCedula())==Integer.parseInt(cedula)) {
                 resu = true;
                
             }
@@ -265,14 +258,16 @@ public class Sistema extends Observable implements Serializable{
     
     @Override
     public void addObserver(Observer observer){
-    this.observer=observer;
+    this.observer.add(observer);
     
     }
     
     public void notifyObservers(){
     if (observer!= null){
-    
-    observer.update(this, this);
+        for (int i = 0; i < observer.size(); i++) {
+            observer.get(i).update(this, this);
+        }
+   
     
     
     }

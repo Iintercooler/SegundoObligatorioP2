@@ -10,12 +10,13 @@ import Dominio.Deposito;
 import Dominio.Empleado;
 import Dominio.Sistema;
 import Dominio.Visita;
+import java.io.Serializable;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.stream.Stream;
 import javax.swing.JOptionPane;
 
-public class RegistroVisita extends javax.swing.JFrame implements Observer {
+public class RegistroVisita extends javax.swing.JFrame implements Observer, Serializable {
 
     Sistema sistema;
 
@@ -127,25 +128,39 @@ public class RegistroVisita extends javax.swing.JFrame implements Observer {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
         if (listaClientes.getSelectedIndex() == -1 || listaContratos.getSelectedIndex() == -1 || listaEmpleados.getSelectedIndex() == -1) {
+            System.out.println();
             JOptionPane.showMessageDialog(null, "Debe seleccionar un elemento de cada lista", "Error", JOptionPane.ERROR_MESSAGE);
 
         } else {
+            int largo = sistema.getVisitas().size();
             try {
                 Contrato c = (Contrato) listaContratos.getSelectedValue();
+
                 Deposito d = c.getDeposito();
+
                 Cliente cl = c.getCliente();
+
                 Empleado e = c.getEmpleado();
                 int dia = Integer.parseInt(campoDia.getText());
                 int mes = Integer.parseInt(campoMes.getText());
-                Visita v = new Visita(d, cl, e, dia, mes, c);
-                sistema.agregarVisita(v);
-                 JOptionPane.showMessageDialog(null, "Visita registrada", "Registro Exitoso", -1);
-                 campoDia.setText("");
-                 campoMes.setText("");
-                 
-            } catch (Exception e) {
 
-                JOptionPane.showMessageDialog(null, "Campos incorrectos", "Error", JOptionPane.ERROR_MESSAGE);
+                Visita v = new Visita(c, d, cl, e, dia, mes);
+                System.out.println(c.toString());
+                sistema.agregarVisita(v);
+                JOptionPane.showMessageDialog(null, "Visita registrada", "Registro Exitoso", -1);
+                campoDia.setText("");
+                campoMes.setText("");
+
+            } catch (Exception e) {
+                if (sistema.getVisitas().size() > largo) {
+                    JOptionPane.showMessageDialog(null, "Visita registrada", "Registro Exitoso", -1);
+                    campoDia.setText("");
+                    campoMes.setText("");
+
+                } else {
+
+                    JOptionPane.showMessageDialog(null, "Campos incorrectos", "Error", JOptionPane.ERROR_MESSAGE);
+                }
 
             }
         }
@@ -174,6 +189,6 @@ public class RegistroVisita extends javax.swing.JFrame implements Observer {
     public void update(Observable o, Object o1) {
         listaEmpleados.setListData(sistema.getEmpleados().toArray());
         listaClientes.setListData(sistema.getClientes().toArray());
-        System.out.println("se elimio un contrato de cliente");
+
     }
 }

@@ -104,6 +104,10 @@ public class RegistrarDeposito extends javax.swing.JFrame {
             if (!sistema.existeDeposito(d)) {
                 sistema.agregarDeposito(d);
                  JOptionPane.showMessageDialog(null, "Deposito agregado", "Registro Exitoso", -1);
+                 NumeroDeposito.setText(" ");
+                 MetrosDeposito.setText(" ");
+                 CheckEstantes.setSelected(false);
+                 CheckRefrigerado.setSelected(false);
             } else {
                 JOptionPane.showMessageDialog(null, "el deposito ya existe", "error", JOptionPane.ERROR_MESSAGE);
             }

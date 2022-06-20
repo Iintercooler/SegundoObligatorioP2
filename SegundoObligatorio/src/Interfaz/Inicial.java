@@ -1,4 +1,3 @@
-
 package Interfaz;
 
 import Dominio.ArchivoLectura;
@@ -11,12 +10,14 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
 public class Inicial extends javax.swing.JFrame {
+
     Sistema sistema;
+
     public Inicial() {
         initComponents();
         this.sistema = new Sistema();
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -27,8 +28,15 @@ public class Inicial extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("INICIO");
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        setPreferredSize(new java.awt.Dimension(450, 250));
+        setResizable(false);
+        getContentPane().setLayout(null);
 
         jLabel1.setText("Ventana inicial");
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(150, 26, 130, 20);
 
         jButton1.setText("Cargar sistema Guardado");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -36,6 +44,8 @@ public class Inicial extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
+        getContentPane().add(jButton1);
+        jButton1.setBounds(84, 69, 231, 29);
 
         jButton2.setText("Crear sistema nuevo");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -43,6 +53,8 @@ public class Inicial extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
+        getContentPane().add(jButton2);
+        jButton2.setBounds(84, 104, 231, 29);
 
         jButton3.setText("Cargar sistema con depositos");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -50,37 +62,8 @@ public class Inicial extends javax.swing.JFrame {
                 jButton3ActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(123, 123, 123)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(84, 84, 84)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton1)
-                            .addComponent(jButton3))))
-                .addContainerGap(85, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addComponent(jLabel1)
-                .addGap(29, 29, 29)
-                .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton3)
-                .addContainerGap(132, Short.MAX_VALUE))
-        );
+        getContentPane().add(jButton3);
+        jButton3.setBounds(84, 139, 231, 29);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -89,36 +72,38 @@ public class Inicial extends javax.swing.JFrame {
         Sistema s = new Sistema();
         this.sistema = s;
         Menu v = new Menu(sistema);
-          v.setExtendedState(MAXIMIZED_BOTH);
+        v.setExtendedState(MAXIMIZED_BOTH);
         v.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         this.sistema = sistema.cargarSistema();
         Menu v = new Menu(sistema);
-          v.setExtendedState(MAXIMIZED_BOTH);
+        v.setExtendedState(MAXIMIZED_BOTH);
         v.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         Sistema s = new Sistema();
         this.sistema = s;
-        
+
         JFileChooser selectorArchivos = new JFileChooser();
-        
+
         selectorArchivos.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
-        
+
         int resultado = selectorArchivos.showOpenDialog(this);
-        
+
         File archivo = selectorArchivos.getSelectedFile(); // obtiene el archivo seleccionado
-       
+
         if ((archivo == null) || (archivo.getName().equals(""))) {
-            
+
             JOptionPane.showMessageDialog(this, "Nombre de archivo inválido", "Nombre de archivo inválido", JOptionPane.ERROR_MESSAGE);
         }
-        
+
 //        System.out.println(archivo.getName());
         ArchivoLectura arch = new ArchivoLectura(archivo.getAbsolutePath());
-       
+
         while (arch.hayMasLineas()) {
             String[] linea = arch.linea().split("#");
             int numero = Integer.parseInt(linea[0]);
@@ -144,6 +129,7 @@ public class Inicial extends javax.swing.JFrame {
         Menu v = new Menu(sistema);
         v.setExtendedState(MAXIMIZED_BOTH);
         v.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

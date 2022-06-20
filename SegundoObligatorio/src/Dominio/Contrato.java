@@ -20,8 +20,8 @@ public class Contrato implements Serializable{
         this.empleado = empleado;
     }
 
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
+    public void setCliente(Cliente clientss) {
+        this.cliente = clientss;
     }
 
     public void setDeposito(Deposito Deposito) {
@@ -58,12 +58,12 @@ public class Contrato implements Serializable{
     
 
   
-    public Contrato(Empleado empleado, Cliente cliente, Deposito Deposito,String detalles,int numero) {
-        this.numero=numero;
-        this.empleado = empleado;
-        this.cliente = cliente;
-        this.Deposito = Deposito;
-        this.detalles=detalles;
+    public Contrato(Empleado empleado, Cliente clientss, Deposito Deposito,String detalles,int numero) {
+        this.setNumero(numero);
+        this.setEmpleado(empleado);
+        this.setCliente(clientss);
+        this.setDeposito(Deposito);
+        this.setDetalles(detalles);
         
     }
 

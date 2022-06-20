@@ -112,46 +112,29 @@ public class ConsultaDepositos extends javax.swing.JFrame implements Observer {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        panelDepositos = new javax.swing.JPanel();
         scroll = new java.awt.ScrollPane();
+        panelDepositos = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        getContentPane().setLayout(null);
+
+        scroll.setPreferredSize(new java.awt.Dimension(5000, 5000));
 
         panelDepositos.addContainerListener(new java.awt.event.ContainerAdapter() {
             public void componentAdded(java.awt.event.ContainerEvent evt) {
                 panelDepositosComponentAdded(evt);
             }
         });
-        panelDepositos.setLayout(new java.awt.GridLayout(1, 0));
+        panelDepositos.setLayout(new java.awt.GridLayout());
+        scroll.add(panelDepositos);
 
-        scroll.setLocation(new java.awt.Point(500, 500));
-        scroll.setPreferredSize(new java.awt.Dimension(5000, 5000));
+        getContentPane().add(scroll);
+        scroll.setBounds(0, 90, 510, 180);
 
         jLabel1.setText("Consulta de Depositos");
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(170, 170, 170)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(40, 40, 40)
-                .addComponent(panelDepositos, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addComponent(scroll, javax.swing.GroupLayout.DEFAULT_SIZE, 510, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(jLabel1)
-                .addGap(44, 44, 44)
-                .addComponent(panelDepositos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10)
-                .addComponent(scroll, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE))
-        );
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(170, 20, 190, 16);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -165,6 +148,7 @@ public class ConsultaDepositos extends javax.swing.JFrame implements Observer {
         ArrayList<Deposito> depositos = sistema.getDepositos();
         String numero;
         panelDepositos.setLayout(new GridLayout(0, 5));
+       
         for (int i = 0; i < depositos.size(); i++) {
             numero = String.valueOf(depositos.get(i).getNumero());
             JButton b = new JButton(numero);
@@ -183,10 +167,10 @@ public class ConsultaDepositos extends javax.swing.JFrame implements Observer {
                 b.setBackground(Color.GREEN);
                 b.setOpaque(true);
             }
-            panelDepositos.add(b);
+            panelDepositos.add(b); // se agrega el boton al panel
 
         }
-        scroll.add(panelDepositos);
+        scroll.add(panelDepositos); // se agrega el scroll al panel
     }
 
     /**

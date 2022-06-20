@@ -14,6 +14,8 @@ import java.awt.Component;
 import java.awt.List;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Observable;
+import java.util.Observer;
 import java.util.Vector;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -27,7 +29,8 @@ import javax.swing.ListSelectionModel;
  *
  * @author fgavello
  */
-public class RegistrarContrato extends javax.swing.JFrame {
+public class RegistrarContrato extends javax.swing.JFrame implements Observer {
+//public class RegistrarContrato extends javax.swing.JFrame {
 
     Sistema sistema;
 
@@ -35,13 +38,8 @@ public class RegistrarContrato extends javax.swing.JFrame {
         this.sistema = s;
 
         initComponents();
-        ordenarLista();
-        Stream<Deposito> depsitosDesocupados = sistema.getDepositos().stream().filter(Deposito -> !Deposito.isOcupado());
-        ListaDepositos.setListData(depsitosDesocupados.toArray());
-        ListaEmpleados.setListData(sistema.getEmpleados().toArray());
-        ListaDepositos.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
-        ListaClientes.setListData(sistema.getClientes().toArray());
-        pintarJlist();
+        cargarDatos();
+       sistema.addObserver(this);
     }
 
     @SuppressWarnings("unchecked")
@@ -262,11 +260,23 @@ public class RegistrarContrato extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void cargarDatos() {
+        ordenarLista();
+        Stream<Deposito> depsitosDesocupados = sistema.getDepositos().stream().filter(Deposito -> !Deposito.isOcupado());
+        ListaDepositos.setListData(depsitosDesocupados.toArray());
+        ListaEmpleados.setListData(sistema.getEmpleados().toArray());
+        ListaDepositos.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+        ListaClientes.setListData(sistema.getClientes().toArray());
+        pintarJlist();
+
+    }
+
+
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
         try {
 
-            if (ListaEmpleados.getSelectedValue() != null && ListaClientes.getSelectedValue() != null && ListaDepositos.getSelectedValue()!=null && !campoDetalles.getText().equalsIgnoreCase("")) {
+            if (ListaEmpleados.getSelectedValue() != null && ListaClientes.getSelectedValue() != null && ListaDepositos.getSelectedValue() != null && !campoDetalles.getText().equalsIgnoreCase("")) {
 
                 Object[] values = ListaDepositos.getSelectedValuesList().toArray();
                 Deposito[] d = new Deposito[values.length];
@@ -278,14 +288,18 @@ public class RegistrarContrato extends javax.swing.JFrame {
 
                 for (int i = 0; i < d.length; i++) {
                     Contrato c = new Contrato((Empleado) ListaEmpleados.getSelectedValue(), (Cliente) ListaClientes.getSelectedValue(), d[i], campoDetalles.getText(), sistema.getCantidadContratos());
+
                     c.getDeposito().setOcupado(true);
                     sistema.agregarContrato(c);
-                }
 
+                    campoMinimo.setText(" ");
+                    campoMaximo.setText(" ");
+                }
+                campoDetalles.setText("");
                 Stream<Deposito> depsitosDesocupados = sistema.getDepositos().stream().filter(Deposito -> !Deposito.isOcupado());
                 ListaDepositos.setListData(depsitosDesocupados.toArray());
                 JOptionPane.showConfirmDialog(null, "Contratos Creados", "Exito", JOptionPane.DEFAULT_OPTION);
-               sistema.notifyObservers();
+
             } else {
                 JOptionPane.showConfirmDialog(null, "Deben seleccionar un Empleado, un Cliente, un Deposito e indicar detalles del contrato", "Error", JOptionPane.ERROR_MESSAGE);
             }
@@ -293,6 +307,7 @@ public class RegistrarContrato extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButton1ActionPerformed
   catch (Exception e) {
+
             JOptionPane.showConfirmDialog(null, "Deben seleccionar almenos un deposito", "Error", JOptionPane.ERROR_MESSAGE);
         }
 
@@ -322,15 +337,6 @@ public class RegistrarContrato extends javax.swing.JFrame {
             JOptionPane.showConfirmDialog(null, "Debe ingresar los tamaños de busqueda", "Error", JOptionPane.ERROR_MESSAGE);
         }
 
-//        if (indiferenteRefrigeracion.isSelected() && !indiferenteEstantes.isSelected()) {
-//            Stream<Deposito> depsitosRefrigerados = sistema.getDepositos().stream().filter(Deposito -> {
-//
-//                return (Deposito.isEstantes() == conEstantes.isSelected() && Deposito.getTamaño() >= Integer.parseInt(campoMinimo.getText()) && Deposito.getTamaño() <= Integer.parseInt(campoMaximo.getText()));
-//
-//            });
-//            ;
-//            ListaDepositos.setListData(depsitosRefrigerados.toArray());
-//        }
 
     }//GEN-LAST:event_buscarDepositoActionPerformed
 
@@ -366,16 +372,12 @@ public class RegistrarContrato extends javax.swing.JFrame {
 
     }//GEN-LAST:event_indiferenteEstantesStateChanged
 
-    
-    private void ordenarLista(){
+    private void ordenarLista() {
         Collections.sort(sistema.getDepositos(), Deposito.Comparators.NUMERO);
     }
-    
-    
-    
-    
+
     private void recargarListaDepositosConCondiciones() {
-// Funciones Lambda Epicas para filtrar By fundamentos de computacion!
+        // Funciones Lambda  para filtrar 
         if (indiferenteEstantes.isSelected() && indiferenteRefrigeracion.isSelected()) {
 
             Stream<Deposito> depsitosDesocupados = sistema.getDepositos().stream().filter(Deposito -> !Deposito.isOcupado() && Deposito.getTamaño() >= Integer.parseInt(campoMinimo.getText()) && Deposito.getTamaño() <= Integer.parseInt(campoMaximo.getText()));
@@ -385,7 +387,7 @@ public class RegistrarContrato extends javax.swing.JFrame {
 
         if (indiferenteRefrigeracion.isSelected() && !indiferenteEstantes.isSelected()) {
             Stream<Deposito> depsitosRefrigerados = sistema.getDepositos().stream().filter(Deposito -> {
-                return (Deposito.isEstantes() == conEstantes.isSelected()  && !Deposito.isOcupado() && Deposito.getTamaño() >= Integer.parseInt(campoMinimo.getText()) && Deposito.getTamaño() <= Integer.parseInt(campoMaximo.getText()) );
+                return (Deposito.isEstantes() == conEstantes.isSelected() && !Deposito.isOcupado() && Deposito.getTamaño() >= Integer.parseInt(campoMinimo.getText()) && Deposito.getTamaño() <= Integer.parseInt(campoMaximo.getText()));
             });
 
             ListaDepositos.setListData(depsitosRefrigerados.toArray());
@@ -394,7 +396,7 @@ public class RegistrarContrato extends javax.swing.JFrame {
 
         if (indiferenteEstantes.isSelected() && !indiferenteRefrigeracion.isSelected()) {
             Stream<Deposito> todosLosDepositos = sistema.getDepositos().stream().filter(Deposito -> {
-                return (Deposito.isRefrigerado() == conRefrigeracion.isSelected() && !Deposito.isOcupado()&& Deposito.getTamaño() >= Integer.parseInt(campoMinimo.getText()) && Deposito.getTamaño() <= Integer.parseInt(campoMaximo.getText()));
+                return (Deposito.isRefrigerado() == conRefrigeracion.isSelected() && !Deposito.isOcupado() && Deposito.getTamaño() >= Integer.parseInt(campoMinimo.getText()) && Deposito.getTamaño() <= Integer.parseInt(campoMaximo.getText()));
             });
 
             ListaDepositos.setListData(todosLosDepositos.toArray());
@@ -404,60 +406,47 @@ public class RegistrarContrato extends javax.swing.JFrame {
         if (!indiferenteEstantes.isSelected() && !indiferenteRefrigeracion.isSelected()) {
 
             Stream<Deposito> todosLosDepositos = sistema.getDepositos().stream().filter(Deposito -> {
-                return (Deposito.isRefrigerado() == conRefrigeracion.isSelected() &&!Deposito.isOcupado() && (Deposito.isEstantes() == conEstantes.isSelected()) && Deposito.getTamaño() >= Integer.parseInt(campoMinimo.getText()) && Deposito.getTamaño() <= Integer.parseInt(campoMaximo.getText()));
+                return (Deposito.isRefrigerado() == conRefrigeracion.isSelected() && !Deposito.isOcupado() && (Deposito.isEstantes() == conEstantes.isSelected()) && Deposito.getTamaño() >= Integer.parseInt(campoMinimo.getText()) && Deposito.getTamaño() <= Integer.parseInt(campoMaximo.getText()));
             });
             ListaDepositos.setListData(todosLosDepositos.toArray());
 
         }
-//     ListaDepositos.getSelectedIndices() //retrona array de int 
-       pintarJlist();
+        pintarJlist();
     }
 
-    
-    
-    private void pintarJlist(){
-    
-    
-     ListaDepositos.setCellRenderer(new DefaultListCellRenderer() {
+    private void pintarJlist() {
+
+        ListaDepositos.setCellRenderer(new DefaultListCellRenderer() {
 
             public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
                 Component c = super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
-                    if (value instanceof Deposito) {
-                        Deposito d = (Deposito) value;
+                if (value instanceof Deposito) {
+                    Deposito d = (Deposito) value;
 //                       
-                        if (d.isEstantes() && d.isRefrigerado()) {
-                            setBackground(Color.GREEN);
-                        } 
-                        if (d.isEstantes() && !d.isRefrigerado()) {
-                            setBackground(Color.ORANGE);
-                        } 
-                        if (!d.isEstantes() && d.isRefrigerado()) {
-                            setBackground(Color.YELLOW);
-                        } 
-                        if (!d.isEstantes() && !d.isRefrigerado()) {
-                            setBackground(Color.blue);
-                        } 
-                        
-                if (isSelected) {
-                    setBackground(getBackground().darker());
+                    if (d.isEstantes() && d.isRefrigerado()) {
+                        setBackground(Color.GREEN);
+                    }
+                    if (d.isEstantes() && !d.isRefrigerado()) {
+                        setBackground(Color.ORANGE);
+                    }
+                    if (!d.isEstantes() && d.isRefrigerado()) {
+                        setBackground(Color.YELLOW);
+                    }
+                    if (!d.isEstantes() && !d.isRefrigerado()) {
+                        setBackground(Color.blue);
+                    }
+
+                    if (isSelected) {
+                        setBackground(getBackground().darker());
+                    }
                 }
-                            } 
                 return c;
             }
 
         });
 
-    
-    
-    
-    
-    
-    
-    
-    
-    
     }
-    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup Estantes;
@@ -492,4 +481,10 @@ public class RegistrarContrato extends javax.swing.JFrame {
     private javax.swing.JRadioButton sinEstantes;
     private javax.swing.JRadioButton sinRefrigeracion;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void update(Observable o, Object o1) {
+        ordenarLista();
+        cargarDatos();
+    }
 }

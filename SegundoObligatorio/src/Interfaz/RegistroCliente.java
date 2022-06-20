@@ -33,14 +33,31 @@ public class RegistroCliente extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        getContentPane().setLayout(null);
+        getContentPane().add(CampoNombre);
+        CampoNombre.setBounds(132, 70, 128, 26);
+        getContentPane().add(CampoCedula);
+        CampoCedula.setBounds(132, 108, 128, 26);
+        getContentPane().add(CampoTelefono);
+        CampoTelefono.setBounds(132, 140, 128, 26);
+        getContentPane().add(CampoMail);
+        CampoMail.setBounds(132, 172, 128, 26);
 
         jLabel1.setText("Nombre");
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(76, 75, 50, 16);
 
         jLabel2.setText("Cedula");
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(83, 108, 43, 16);
 
         jLabel3.setText("Telefono");
+        getContentPane().add(jLabel3);
+        jLabel3.setBounds(71, 145, 55, 16);
 
         jLabel4.setText("Mail");
+        getContentPane().add(jLabel4);
+        jLabel4.setBounds(100, 182, 26, 16);
 
         botonRegistrar.setText("Registrar Cliente");
         botonRegistrar.addActionListener(new java.awt.event.ActionListener() {
@@ -48,61 +65,12 @@ public class RegistroCliente extends javax.swing.JFrame {
                 botonRegistrarActionPerformed(evt);
             }
         });
+        getContentPane().add(botonRegistrar);
+        botonRegistrar.setBounds(128, 233, 148, 29);
 
         jLabel5.setText("Registro de Clientes");
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(128, 128, 128)
-                        .addComponent(botonRegistrar))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(62, 62, 62)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(CampoNombre)
-                                        .addComponent(CampoTelefono)
-                                        .addComponent(CampoMail, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(CampoCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addGap(0, 561, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 46, Short.MAX_VALUE)
-                .addGap(24, 24, 24)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(CampoNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(CampoCedula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(CampoTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(CampoMail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
-                .addGap(35, 35, 35)
-                .addComponent(botonRegistrar)
-                .addGap(38, 38, 38))
-        );
+        getContentPane().add(jLabel5);
+        jLabel5.setBounds(62, 0, 198, 46);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -119,6 +87,10 @@ public class RegistroCliente extends javax.swing.JFrame {
 
             if (!sistema.existePersona(cedula)) {
                 sistema.agragarCliente(c);
+                CampoMail.setText(" ");
+                CampoNombre.setText(" ");
+                CampoCedula.setText(" ");
+                CampoTelefono.setText(" ");
 
                 JOptionPane.showMessageDialog(null, "Cliente registrado", "Exitoso", JOptionPane.OK_OPTION);
 
